@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://clmwgwuwj8lbv"]
 
 [ext_resource type="Texture2D" uid="uid://b1o626fbt63m2" path="res://icon.svg" id="1_tm4xg"]
-[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="2_c6i2x"]
+[ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_c6i2x"]
 [ext_resource type="PackedScene" uid="uid://bi8kun25nhp4y" path="res://Assets/pizza/spinningpizza.tscn" id="3_molt8"]
 [ext_resource type="PackedScene" uid="uid://dfkjih3x8n5tv" path="res://Assets/raw/skateboard.glb" id="4_yevdn"]
 [ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="5_r354r"]
