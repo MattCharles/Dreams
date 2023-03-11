@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://chkkys4p7l1vq"]
+[gd_scene load_steps=10 format=3 uid="uid://chkkys4p7l1vq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i2x1c"]
+[ext_resource type="Script" path="res://Scripts/PlayerCam.gd" id="2_ds1lf"]
+[ext_resource type="Shader" path="res://Materials/Shaders/Action.gdshader" id="2_kemrt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stwf7"]
 
@@ -8,6 +10,23 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8u0hx"]
 material = SubResource("StandardMaterial3D_400fb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p3x0a"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dmdms"]
+noise = SubResource("FastNoiseLite_p3x0a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rq1jb"]
+shader = ExtResource("2_kemrt")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_count = 2.0
+shader_parameter/line_density = 0.555
+shader_parameter/line_faloff = 0.302
+shader_parameter/mask_size = 0.0
+shader_parameter/mask_edge = 0.804
+shader_parameter/animation_speed = 12.929
+shader_parameter/noise = SubResource("NoiseTexture2D_dmdms")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_i2x1c")
@@ -24,6 +43,17 @@ mesh = SubResource("CapsuleMesh_8u0hx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63777, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
+script = ExtResource("2_ds1lf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Neck/Camera3D"]
+
+[node name="ColorRect" type="ColorRect" parent="Neck/Camera3D/CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_rq1jb")
+offset_left = 2.0
+offset_right = 1921.0
+offset_bottom = 1080.0
+mouse_filter = 1
 
 [node name="Interaction" type="RayCast3D" parent="Neck/Camera3D"]
 target_position = Vector3(0, 0, -5)
@@ -38,3 +68,5 @@ linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Neck/Camera3D"]
+
+[connection signal="isSprinting" from="." to="Neck/Camera3D" method="_on_player_is_sprinting"]

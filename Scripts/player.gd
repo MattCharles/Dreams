@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
+@export 
+var SPEED = 5.0
+@export
+var JUMP_VELOCITY = 4.5
+@export 
+var SPRINT_SPEED = 10.0
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-
-
+signal isSprinting(bool);
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -14,8 +17,6 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var hand = $Neck/Camera3D/Hand
 @onready var joint = $Neck/Camera3D/Generic6DOFJoint3D
 @onready var staticBody = $Neck/Camera3D/StaticBody3D
-
-
 
 var picked_object
 var pull_power = 7
@@ -84,10 +85,18 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		var movementSpeedThisFrame = SPEED
+		var sprinting = false;
+		if (Input.is_action_pressed("sprint")):	
+			movementSpeedThisFrame = SPRINT_SPEED
+			sprinting = true;
+			
+		velocity.x = direction.x * movementSpeedThisFrame
+		velocity.z = direction.z * movementSpeedThisFrame
+		isSprinting.emit(sprinting) # Player sprinted this frame
+	else:	
+		# 
+		velocity.x = move_toward(velocity.x, 0, SPEED) 
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
 
