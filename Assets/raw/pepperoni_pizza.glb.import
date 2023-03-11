@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cl2htts5lbsq7"
-path="res://.godot/imported/pepperoni_pizza.glb-ecfd0d3023090a291b86c21026f614a2.scn"
+path="res://.godot/imported/pepperoni_pizza.glb-ad210028fc1bc294c1d898e4dfb0cd05.scn"
 
 [deps]
 
-source_file="res://Assets/pepperoni_pizza.glb"
-dest_files=["res://.godot/imported/pepperoni_pizza.glb-ecfd0d3023090a291b86c21026f614a2.scn"]
+source_file="res://Assets/raw/pepperoni_pizza.glb"
+dest_files=["res://.godot/imported/pepperoni_pizza.glb-ad210028fc1bc294c1d898e4dfb0cd05.scn"]
 
 [params]
 
