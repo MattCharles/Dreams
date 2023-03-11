@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi8kun25nhp4y"]
+[gd_scene load_steps=7 format=3 uid="uid://bi8kun25nhp4y"]
 
 [ext_resource type="PackedScene" uid="uid://cl2htts5lbsq7" path="res://Assets/raw/pepperoni_pizza.glb" id="1_aq0sq"]
 [ext_resource type="PackedScene" uid="uid://bhx4mvm6pkm52" path="res://Assets/environment/barrel.glb" id="2_4u74p"]

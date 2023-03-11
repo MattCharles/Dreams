@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cdbgngipd24l0"]
+
+[node name="pizzacursor" type="TextureRect"]

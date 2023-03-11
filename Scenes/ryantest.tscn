@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ci3w08jx6ifxo"]
+[gd_scene load_steps=13 format=3 uid="uid://ci3w08jx6ifxo"]
 
 [ext_resource type="Texture2D" uid="uid://b1o626fbt63m2" path="res://icon.svg" id="1_ucag4"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_30xi0"]
+[ext_resource type="PackedScene" uid="uid://dfkjih3x8n5tv" path="res://Assets/raw/skateboard.glb" id="3_80uua"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -65,3 +66,6 @@ mesh = SubResource("CapsuleMesh_8u0hx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63777, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
+
+[node name="skateboard" parent="." instance=ExtResource("3_80uua")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.70886, 0.416182, 0.707849)
