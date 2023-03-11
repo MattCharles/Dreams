@@ -7,7 +7,7 @@ var timer_on := false
 
 func _ready():
 	timer_on = true
-	var finish_line = self.get_parent().get_node("FinishLine")
+	var finish_line = self.get_parent().get_parent().get_node("FinishLine")
 	finish_line.finished.connect(stop_timer)
 
 func _process(delta):
@@ -21,7 +21,6 @@ func _process(delta):
 	var hours = fmod(fmod(time, 3600 * 60) / 3600, 24)
 	var days = fmod(time, 12960000) / 86400
 	var time_passed := ""
-	print(str(days))
 	if days >= 1:
 		time_passed = "%02d:%02d:%02d:%02d:%03d" % [days, hours, mins, secs, mills]
 	elif hours >= 1:
