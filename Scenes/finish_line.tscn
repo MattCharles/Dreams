@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4ama7j4hhi68"]
+
+[ext_resource type="Script" path="res://Scripts/FinishLine.gd" id="1_4amwv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1kys6"]
+size = Vector3(1, 1.93614, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sb747"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w4cv5"]
+
+[node name="FinishLine" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_4amwv")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.028605, 0)
+shape = SubResource("BoxShape3D_1kys6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_sb747")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("CylinderMesh_w4cv5")
+skeleton = NodePath("")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("CylinderShape3D_sb747")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D2/CollisionShape3D"]
+mesh = SubResource("CylinderMesh_w4cv5")
+skeleton = NodePath("")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
