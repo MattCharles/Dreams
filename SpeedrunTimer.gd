@@ -7,6 +7,10 @@ var seconds := 0
 var minutes := 0
 var hours := 0
 
+func _ready():
+	var finish_line = self.get_parent().get_node("FinishLine")
+	finish_line.finished.connect(stop_timer)
+
 func _process(delta):
 	pass
 
@@ -26,4 +30,5 @@ func update_display():
 	label.text = "%04d:%02d:%02d" % [hours, minutes, seconds]
 
 func stop_timer():
+	print("stopping timer")
 	timer.stop()
