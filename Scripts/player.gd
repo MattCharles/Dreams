@@ -9,6 +9,8 @@ var SPRINT_SPEED = 10.0
 
 signal isSprinting(bool);
 
+@onready var pizza := preload("res://Scenes/rope.tscn")
+
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var neck := $Neck
@@ -40,7 +42,13 @@ func _unhandled_input(event: InputEvent) -> void:
 				camera.rotate_x(-event.relative.y * 0.01)
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(60))
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if picked_object ==null:
+		var this_pizza := pizza.instantiate()
+		get_parent().add_child(this_pizza)
+		this_pizza.position = interaction.global_position
+		var launch_vector = (interaction.target_position - interaction.position).normalized()
+		launch_vector = launch_vector.rotated(Vector3(1, 0, 0), camera.rotation.x).rotated(Vector3(0, 1, 0), neck.rotation.y)
+		this_pizza.shoot(launch_vector)
+		if picked_object == null:
 			pick_object()
 		elif picked_object != null:
 			drop_object()
@@ -59,7 +67,7 @@ func rotate_object(event):
 
 func pick_object():
 	var collider = interaction.get_collider()
-	if collider != null and collider is RigidBody3D:
+	if collider != null and collider is Pizza:
 		picked_object = collider
 		joint.set_node_b(picked_object.get_path())
 		

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://caw77ftpx0iys"]
+
+[ext_resource type="Script" path="res://Scripts/Rope.gd" id="1_0fcmu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0d3gk"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1n0ha"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ldx62"]
+
+[node name="Rope" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -0.000820323, -1, 0, 1, -0.000820323, 0, 0, 0)
+script = ExtResource("1_0fcmu")
+
+[node name="Links" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_0d3gk")
+
+[node name="Tip" type="Area3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.259344, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tip"]
+shape = SubResource("SphereShape3D_1n0ha")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tip"]
+mesh = SubResource("SphereMesh_ldx62")
+
+[node name="Hitter" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1, 0)
+collide_with_areas = true
