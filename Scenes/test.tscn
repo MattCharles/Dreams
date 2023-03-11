@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="3_molt8"]
 [ext_resource type="PackedScene" uid="uid://dfkjih3x8n5tv" path="res://Assets/raw/skateboard.glb" id="4_yevdn"]
 [ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="5_r354r"]
-[ext_resource type="PackedScene" uid="uid://c0umqvx7sgcfg" path="res://Scenes/HUD.tscn" id="6_d6ydr"]
+[ext_resource type="PackedScene" uid="uid://bsmww825t258y" path="res://Scenes/HUD.tscn" id="6_d6ydr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

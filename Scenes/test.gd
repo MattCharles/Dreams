@@ -1,11 +1,17 @@
 extends Node3D
 
+@onready var player := $Player
+@onready var player_spawn := $PlayerSpawn
 
-# Called when the node enters the scene tree for the first time.
+@onready var pizza := $SpinningPizza/RigidBody3D
+@onready var pizza_spawn := $PizzaSpawn
+
 func _ready():
-	get_viewport().set_physics_object_picking(true) # Replace with function body.
+	get_viewport().set_physics_object_picking(true)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if player.position.y < -10:
+		player.respawn(player_spawn.position)
+	if pizza.position.y < -10:
+		pizza.position = pizza_spawn.position
+		pizza.linear_velocity = Vector3.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0umqvx7sgcfg"]
+[gd_scene load_steps=4 format=3 uid="uid://bsmww825t258y"]
 
 [ext_resource type="Texture2D" uid="uid://c3ik8rt0mywib" path="res://Assets/2d/crosshair180.png" id="1_16y7l"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_lkfk1"]
