@@ -7,8 +7,9 @@ var timer_on := false
 
 func _ready():
 	timer_on = true
-	var finish_line = self.get_parent().get_parent().get_node("FinishLine")
-	finish_line.finished.connect(stop_timer)
+	var finish_lines = get_tree().get_nodes_in_group("finish_lines")
+	for finish_line in finish_lines:
+		finish_line.finished.connect(stop_timer)
 
 func _process(delta):
 	if not timer_on:
