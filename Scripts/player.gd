@@ -29,12 +29,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	elif event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if !lockedCam:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			if event is InputEventMouseMotion:
+				neck.rotate_y(-event.relative.x * 0.01)
+				camera.rotate_x(-event.relative.y * 0.01)
+				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-30), deg_to_rad(60))
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if picked_object ==null:
+			pick_object()
+		elif picked_object != null:
+			drop_object()
+			
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		lockedCam = true
+		rotate_object(event)
+	else:
+		lockedCam = false
+			
+func rotate_object(event):
+	if picked_object != null:
 		if event is InputEventMouseMotion:
-			neck.rotate_y(-event.relative.x * 0.01)
-			camera.rotate_x(-event.relative.y * 0.01)
-			camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-30), deg_to_rad(60))
-
+			staticBody.rotate_x(deg_to_rad(event.relative.y * rotation_power))
+			staticBody.rotate_y(deg_to_rad(event.relative.x * rotation_power))
 
 func pick_object():
 	var collider = interaction.get_collider()
@@ -46,6 +63,9 @@ func pick_object():
 func drop_object():
 	if picked_object != null:
 		picked_object = null
+		joint.set_node_b(joint.get_path())
+		
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -67,11 +87,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if picked_object ==null:
-			pick_object()
-		elif picked_object != null:
-			drop_object()
+
+		
 			
 			
 			
