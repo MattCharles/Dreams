@@ -1,0 +1,159 @@
+[gd_scene load_steps=15 format=3 uid="uid://ce32cfxbeausk"]
+
+[ext_resource type="Script" path="res://Scenes/test.gd" id="1_pa2ft"]
+[ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_as24o"]
+[ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="3_hfy5s"]
+[ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="4_3vuwl"]
+[ext_resource type="PackedScene" uid="uid://bsmww825t258y" path="res://Scenes/HUD.tscn" id="5_7r71v"]
+[ext_resource type="Shader" path="res://Materials/Shaders/water.gdshader" id="6_2cpby"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fdi5v"]
+sky_material = SubResource("ProceduralSkyMaterial_7rkdn")
+
+[sub_resource type="Environment" id="Environment_rrpnd"]
+background_mode = 2
+sky = SubResource("Sky_fdi5v")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkfeq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o74l8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_34iys"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_o74l8")
+size = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vh13g"]
+size = Vector3(300, 1, 300)
+subdivide_width = 300
+subdivide_height = 300
+subdivide_depth = 300
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wtn8n"]
+render_priority = 0
+shader = ExtResource("6_2cpby")
+shader_parameter/out_color = Color(0, 0.101961, 1, 1)
+shader_parameter/amount = 0.3
+shader_parameter/speed = 1.0
+shader_parameter/beer_factor = 50.0
+shader_parameter/metallic = 0.2
+shader_parameter/specular = 0.5
+shader_parameter/roughness = 0.3
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_pa2ft")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rrpnd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="box" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18249, -5.60137, 9.64117)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="box3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.288374, -5.60137, -3.37475)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box3"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box3"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="box4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84572, -5.60137, -13.3363)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box4"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box4"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="box7" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84572, -5.60137, -23.9303)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box7"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box7"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="box5" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36806, -5.60137, -34.5146)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box5"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box5"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="box6" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36806, -5.60137, -44.4705)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box6"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box6"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="Player" parent="." instance=ExtResource("2_as24o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14442, 0, 13.0873)
+
+[node name="PizzaSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19893, 1.8541, -0.0998753)
+
+[node name="SpinningPizza" parent="." instance=ExtResource("3_hfy5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39247, 0, -0.653124)
+
+[node name="FinishLine" parent="." instance=ExtResource("4_3vuwl")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.08098, 2.40726, -44.3743)
+
+[node name="HUD" parent="." instance=ExtResource("5_7r71v")]
+
+[node name="PlayerSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12073, 0.655181, 13.5395)
+
+[node name="Water" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.2433, -1.59327, 4.08986)
+mesh = SubResource("BoxMesh_vh13g")
+surface_material_override/0 = SubResource("ShaderMaterial_wtn8n")
