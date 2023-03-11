@@ -11,9 +11,16 @@ config_version=5
 [application]
 
 config/name="Dreams"
-run/main_scene="res://Scenes/test.tscn"
+run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="ignore"
 
 [input]
 

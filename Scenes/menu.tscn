@@ -1,0 +1,172 @@
+[gd_scene load_steps=8 format=3 uid="uid://b30ixqckg1j5c"]
+
+[ext_resource type="Texture2D" uid="uid://bft7nb1cf72gw" path="res://Palette2.png" id="1_k0we1"]
+[ext_resource type="Script" path="res://Scripts/main-menu.gd" id="1_nvooe"]
+[ext_resource type="FontFile" uid="uid://cwy1n1rvwjg5r" path="res://Fonts/AlienEncounters/SFAlienEncounters.ttf" id="2_pm4sq"]
+[ext_resource type="FontFile" uid="uid://dokcyr4vw5wb6" path="res://Fonts/streamster/Streamster.ttf" id="3_iwtji"]
+[ext_resource type="FontFile" uid="uid://dsx8djwkr6h3g" path="res://Fonts/AlienEncounters/SFAlienEncountersSolid-Ital.ttf" id="4_t56s4"]
+
+[sub_resource type="Gradient" id="Gradient_8eysy"]
+colors = PackedColorArray(0.431373, 0.854902, 0.996078, 1, 0.976471, 0.658824, 0.847059, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y3wcb"]
+gradient = SubResource("Gradient_8eysy")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_nvooe")
+
+[node name="Background" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1080, 1920)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1920.0
+offset_right = 1080.0
+offset_bottom = 840.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+texture = SubResource("GradientTexture1D_y3wcb")
+
+[node name="Palette2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1260, 542)
+texture = ExtResource("1_k0we1")
+
+[node name="Pizza" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 50.0
+offset_right = 884.0
+offset_bottom = 204.0
+theme_override_colors/font_outline_color = Color(0.615686, 0.443137, 0.796078, 1)
+theme_override_constants/outline_size = 11
+theme_override_fonts/font = ExtResource("2_pm4sq")
+theme_override_font_sizes/font_size = 256
+text = "PIZZA"
+
+[node name="Dreams" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 581.0
+offset_bottom = 317.0
+theme_override_colors/font_color = Color(0.615686, 0.443137, 0.796078, 1)
+theme_override_fonts/font = ExtResource("3_iwtji")
+theme_override_font_sizes/font_size = 128
+text = "Dreams"
+
+[node name="PizzaTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="DreamTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 500.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 100.0
+
+[node name="Start" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_left = 141.0
+offset_top = 878.0
+offset_right = 681.0
+offset_bottom = 937.0
+focus_neighbor_left = NodePath("../Quit")
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_right = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Quit")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.807843, 0.772549, 1, 1)
+theme_override_colors/font_hover_color = Color(0.996078, 0.870588, 0.878431, 1)
+theme_override_fonts/font = ExtResource("4_t56s4")
+theme_override_font_sizes/font_size = 64
+text = "Dream"
+flat = true
+alignment = 0
+
+[node name="Options" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_left = 141.0
+offset_top = 947.0
+offset_right = 681.0
+offset_bottom = 1006.0
+focus_neighbor_left = NodePath("../Start")
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_right = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Start")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.807843, 0.772549, 1, 1)
+theme_override_colors/font_hover_color = Color(0.996078, 0.870588, 0.878431, 1)
+theme_override_fonts/font = ExtResource("4_t56s4")
+theme_override_font_sizes/font_size = 64
+text = "EDIT"
+flat = true
+alignment = 0
+
+[node name="Quit" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_left = 141.0
+offset_top = 1016.0
+offset_right = 681.0
+offset_bottom = 1075.0
+focus_neighbor_left = NodePath("../Options")
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_right = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Start")
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../Options")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.807843, 0.772549, 1, 1)
+theme_override_colors/font_hover_color = Color(0.996078, 0.870588, 0.878431, 1)
+theme_override_fonts/font = ExtResource("4_t56s4")
+theme_override_font_sizes/font_size = 64
+text = "WAKE"
+flat = true
+alignment = 0
+
+[node name="StartTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 878.0
+offset_bottom = 878.0
+
+[node name="OptionsTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 947.0
+offset_bottom = 947.0
+
+[node name="QuitTarget" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 1016.0
+offset_bottom = 1016.0
+
+[connection signal="mouse_entered" from="Start" to="." method="_on_start_mouse_entered"]
+[connection signal="mouse_exited" from="Start" to="." method="_on_start_mouse_exited"]
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_exited" from="Options" to="." method="_on_options_mouse_exited"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="Quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="mouse_exited" from="Quit" to="." method="_on_quit_mouse_exited"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
