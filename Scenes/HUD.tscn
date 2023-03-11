@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0umqvx7sgcfg"]
+
+[ext_resource type="Texture2D" uid="uid://c3ik8rt0mywib" path="res://Assets/2d/crosshair180.png" id="1_16y7l"]
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_lkfk1"]
+[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="2_suavb"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_lkfk1")
+
+[node name="Crosshair" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Sprite" type="Sprite2D" parent="Crosshair"]
+position = Vector2(20, 20)
+texture = ExtResource("1_16y7l")
+
+[node name="SpeedrunTimer" parent="." instance=ExtResource("2_suavb")]
+layout_mode = 1
+mouse_filter = 1

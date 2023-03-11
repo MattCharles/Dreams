@@ -8,7 +8,7 @@ var minutes := 0
 var hours := 0
 
 func _ready():
-	var finish_line = self.get_parent().get_node("FinishLine")
+	var finish_line = self.get_parent().get_parent().get_node("FinishLine")
 	finish_line.finished.connect(stop_timer)
 
 func _process(delta):

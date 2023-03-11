@@ -1,11 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://clmwgwuwj8lbv"]
+[gd_scene load_steps=17 format=3 uid="uid://clmwgwuwj8lbv"]
 
+[ext_resource type="Script" path="res://Scenes/test.gd" id="1_gym5k"]
 [ext_resource type="Texture2D" uid="uid://b1o626fbt63m2" path="res://icon.svg" id="1_tm4xg"]
 [ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_c6i2x"]
-[ext_resource type="PackedScene" uid="uid://bi8kun25nhp4y" path="res://Assets/pizza/spinningpizza.tscn" id="3_molt8"]
+[ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="3_molt8"]
 [ext_resource type="PackedScene" uid="uid://dfkjih3x8n5tv" path="res://Assets/raw/skateboard.glb" id="4_yevdn"]
 [ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="5_r354r"]
-[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="6_a8x71"]
+[ext_resource type="PackedScene" uid="uid://c0umqvx7sgcfg" path="res://Scenes/HUD.tscn" id="6_d6ydr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -38,8 +39,7 @@ lightmap_size_hint = Vector2i(14, 21)
 material = SubResource("StandardMaterial3D_o74l8")
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Control" parent="." instance=ExtResource("6_a8x71")]
+script = ExtResource("1_gym5k")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rrpnd")
@@ -99,3 +99,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55503, 0.400126, -2.75854)
 
 [node name="FinishLine" parent="." instance=ExtResource("5_r354r")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.08098, 2.97206, 7.75258)
+
+[node name="HUD" parent="." instance=ExtResource("6_d6ydr")]

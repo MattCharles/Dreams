@@ -23,6 +23,9 @@ var rotation_power =0.05
 var jump_count = 0
 var lockedCam = false
 
+func _ready():
+	set_process_unhandled_input(true)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
