@@ -20,19 +20,25 @@ const TITLE_MAX_TRAVEL := Vector2(1000, 1000) # Longest distance title will foll
 const SUBTITLE_MAX_TRAVEL := Vector2(200, 200) # Longest distance title will follow mouse
 
 const HOVER_OFFSET_VECTOR := Vector2(100, 0)
+const INTRO_DELAY := 5 # How long should we allow for the intro to play before setting position with mouse?
+var intro := true
 
 func _process(delta: float) -> void:
-	
-	var pizza_dist_to_mouse = (get_global_mouse_position() - center_of_screen).clamp(-TITLE_MAX_TRAVEL, TITLE_MAX_TRAVEL)
-	var dream_dist_to_mouse = (get_global_mouse_position() - center_of_screen).clamp(-SUBTITLE_MAX_TRAVEL, SUBTITLE_MAX_TRAVEL)
-	
-	pizza_label.position = lerp(pizza_target.position, pizza_dist_to_mouse, delta * 2)
-	dream_label.position = lerp(dream_target.position, dream_dist_to_mouse, delta * 2)
+	if not intro:
+		var pizza_dist_to_mouse = (get_global_mouse_position() - center_of_screen).clamp(-TITLE_MAX_TRAVEL, TITLE_MAX_TRAVEL)
+		var dream_dist_to_mouse = (get_global_mouse_position() - center_of_screen).clamp(-SUBTITLE_MAX_TRAVEL, SUBTITLE_MAX_TRAVEL)
+		
+		pizza_label.position = lerp(pizza_target.position, pizza_dist_to_mouse, delta * 2)
+		dream_label.position = lerp(dream_target.position, dream_dist_to_mouse, delta * 2)
 
 func _ready():
 	var rect = get_viewport_rect()
 	center_of_screen = rect.size / 2
 	paint_menu()
+	get_tree().create_timer(INTRO_DELAY).timeout.connect(end_intro)
+	
+func end_intro():
+	intro = false
 
 func paint_menu():
 	pizza()
@@ -49,10 +55,10 @@ func pizza():
 
 func dream():
 	var dream_tween = get_tree().create_tween()
-	var position_tween = get_tree().create_tween()
+	dream_tween.set_parallel(true)
 	dream_tween.tween_property(dream_label, "position",
 			dream_target.position, 2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	position_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
+	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
 
 func start():
 	var start_button_tween = get_tree().create_tween()
