@@ -5,11 +5,13 @@ extends Control
 var time = 0
 var timer_on := false
 
+signal finished_level(time:String)
+
 func _ready():
 	timer_on = true
 	var finish_lines = get_tree().get_nodes_in_group("finish_lines")
 	for finish_line in finish_lines:
-		finish_line.finished.connect(stop_timer)
+		finish_line.finished.connect(finish_level)
 
 func _process(delta):
 	if not timer_on:
@@ -30,6 +32,10 @@ func _process(delta):
 		time_passed = "%02d:%02d:%03d" % [mins, secs, mills]
 	
 	label.text = time_passed
+
+func finish_level():
+	stop_timer()
+	emit_signal("finished_level", label.text)
 
 func stop_timer():
 	timer_on = false
