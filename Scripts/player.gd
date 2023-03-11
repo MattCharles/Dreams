@@ -15,8 +15,6 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var joint = $Neck/Camera3D/Generic6DOFJoint3D
 @onready var staticBody = $Neck/Camera3D/StaticBody3D
 
-
-
 var picked_object
 var pull_power = 7
 var rotation_power =0.05
@@ -90,14 +88,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-
-		
-			
-			
-			
 	if picked_object != null:
 		var a = picked_object.global_transform.origin
 		var b = hand.global_transform.origin
 		picked_object.set_linear_velocity((b-a)*pull_power)
 
 	move_and_slide()
+	
+func respawn(spawn_point:Vector3):
+	velocity = Vector3.ZERO
+	position = spawn_point
+	
