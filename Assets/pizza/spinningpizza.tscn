@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi8kun25nhp4y"]
+[gd_scene load_steps=6 format=3 uid="uid://bi8kun25nhp4y"]
 
 [ext_resource type="PackedScene" uid="uid://cl2htts5lbsq7" path="res://Assets/raw/pepperoni_pizza.glb" id="1_aq0sq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vqpes"]
+radius = 1.059
 
 [sub_resource type="Animation" id="Animation_k4cto"]
 resource_name = "PizzaSpin"
@@ -49,12 +52,20 @@ _data = {
 
 [node name="SpinningPizza" type="Node3D"]
 
-[node name="Pivot" type="Marker3D" parent="."]
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, -2.98023e-08)
 
-[node name="pepperoni_pizza" parent="Pivot" instance=ExtResource("1_aq0sq")]
-transform = Transform3D(1, 0, 0, 0, 0.34202, -0.939693, 0, 0.939693, 0.34202, 0, 1, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24221, 1.09363, -0.0556774)
+shape = SubResource("SphereShape3D_vqpes")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/pepperoni_pizza"]
+[node name="Pivot" type="Marker3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 8.88178e-16, 2.98023e-08)
+
+[node name="pepperoni_pizza" parent="RigidBody3D/Pivot" instance=ExtResource("1_aq0sq")]
+transform = Transform3D(1, 0, 0, 0, 0.342021, -0.939693, 0, 0.939693, 0.342021, 0, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RigidBody3D/Pivot/pepperoni_pizza"]
 autoplay = "PizzaSpin"
 libraries = {
 "": SubResource("AnimationLibrary_32p2v")
