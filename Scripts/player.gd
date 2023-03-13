@@ -7,7 +7,7 @@ var JUMP_VELOCITY = 4.5
 @export 
 var SPRINT_SPEED = 10.0
 
-signal isSprinting(bool);
+signal isSprinting(bool)
 
 @onready var chain_link := preload("res://Scenes/rope.tscn")
 const GRAPPLE_DISTANCE := 500
@@ -46,6 +46,11 @@ var pull_power = 7
 var rotation_power =0.05
 var jump_count = 0
 var lockedCam = false
+#player has x/z movement but no y velocity
+var groundedMovementThisFrame = false
+@export
+var lastWalkingSfxPosition = 0;
+
 
 func _ready():
 	grapple_cast.target_position *= GRAPPLE_DISTANCE
@@ -121,7 +126,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * movementSpeedThisFrame
 		isSprinting.emit(sprinting) # Player sprinted this frame
 	else:	
-		# 
 		velocity.x = move_toward(velocity.x, 0, SPEED) 
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
@@ -148,8 +152,26 @@ func _physics_process(delta: float) -> void:
 			shoot_hook()
 		#this_pizza.shoot(-launch_vector.z, camera.get_global_rotation_degrees())
 	
+
+	if(velocity.y == 0 and (velocity.x != 0 or velocity.z != 0)):
+		if (not $WalkingFxPlayer.playing):
+			var walkingFxLength = $WalkingFxPlayer.stream.get_length()
+			if (lastWalkingSfxPosition == walkingFxLength):
+					lastWalkingSfxPosition = 0;
+			
+			if (not $WalkingFxPlayer.has_stream_playback()):
+				$WalkingFxPlayer.play()
+					
+			print(lastWalkingSfxPosition)
+			$WalkingFxPlayer.stream_paused = false
+	else:
+		lastWalkingSfxPosition = $WalkingFxPlayer.get_playback_position()
+		print("stopping playingback at " + str(lastWalkingSfxPosition))
+		$WalkingFxPlayer.stream_paused = true
+		
+		
 	move_and_slide()
-	
+
 func shoot_hook():
 	print("shooting hook from " + str(grapple_line.start) + " to " + str(grapple_line.end))
 	var num_links = num_links_necessary()
