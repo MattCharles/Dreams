@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dadqmy82ifs6o"]
+[gd_scene load_steps=2 format=3 uid="uid://dadqmy82ifs6o"]
 
 [ext_resource type="PackedScene" path="res://Scenes/chainlink.tscn" id="2_nl6oy"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_5tt8a"]
-size = Vector3(0.797207, 0.99915, 0.266269)
 
 [node name="Rope" type="Node3D"]
 
@@ -11,8 +8,3 @@ size = Vector3(0.797207, 0.99915, 0.266269)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 
 [node name="Mesh" parent="Link" instance=ExtResource("2_nl6oy")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Link"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0165686)
-shape = SubResource("BoxShape3D_5tt8a")

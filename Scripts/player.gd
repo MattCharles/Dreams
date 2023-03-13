@@ -29,8 +29,10 @@ class VectorPair:
 
 var grapple_line:=VectorPair.new()
 var chain_links:=[]
-var hooking := false
-var link_height := 1 #TODO: The chain itself should be able to provide this info. Hard coding for now
+var grapple_chain_is_out := false
+var link_height := .2 #TODO: The chain itself should be able to provide this info. Hard coding for now
+var original_hook_distance := 0.0
+var grapple_chain_fully_extended := false
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -101,8 +103,10 @@ func drop_object():
 
 func _physics_process(delta: float) -> void:
 	grapple_line.start = grapple_hand.global_position
-	if hooking: resize_chain()
+	if grapple_chain_is_out: 
+		resize_chain()
 	var links_in_chain = chain_links.size()
+	grapple_chain_fully_extended = grapple_chain_is_out and original_hook_distance <= grapple_line.get_distance()
 	for i in links_in_chain:
 		position_link(chain_links[i], i+1, links_in_chain)
 	# Add the gravity.
@@ -130,6 +134,14 @@ func _physics_process(delta: float) -> void:
 	else:	
 		velocity.x = move_toward(velocity.x, 0, SPEED) 
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+	if grapple_chain_fully_extended:
+		var dir = global_position.direction_to(grapple_line.end)
+		var original_magnitude = velocity.length()
+		var new_rotation_axis = velocity.normalized().cross(dir)
+		var rotated_velocity = velocity.rotated(new_rotation_axis.normalized(), deg_to_rad(90))
+		print("OM: " + str(original_magnitude) + " new: " + str(rotated_velocity.length()))
+		velocity = rotated_velocity
+		pass
 		
 	if picked_object != null:
 		var a = picked_object.global_transform.origin
@@ -137,16 +149,20 @@ func _physics_process(delta: float) -> void:
 		picked_object.set_linear_velocity((b-a)*pull_power)
 
 	if Input.is_action_just_pressed("shoot"):
-		if hooking:
+		if grapple_chain_is_out:
 			while not chain_links.is_empty():
 				chain_links.pop_front().queue_free()
-			hooking = false
+			grapple_chain_is_out = false
+			original_hook_distance = 0
 			return
 		if grapple_cast.is_colliding():
 			grapple_line.end = grapple_cast.get_collision_point()
-			print(grapple_line.get_distance())
-			hooking = true
+			original_hook_distance = grapple_line.get_distance() + .5
+			grapple_chain_is_out = true
 			shoot_hook()
+	if Input.is_action_pressed("shoot") and grapple_chain_is_out:
+		velocity = global_position.direction_to(grapple_line.end) * SPEED
+		original_hook_distance = grapple_line.get_distance() + .5
 		
 	
 	if(noise):
@@ -198,7 +214,8 @@ func num_links_necessary() -> int:
 	return result
 	
 func position_link(link, index:int, num_links_in_chain:int):
-	link.global_position = grapple_line.get_line() * (float(index) / num_links_in_chain) + grapple_hand.global_position
+	var new_position = grapple_line.get_line() * (float(index) / num_links_in_chain) + grapple_hand.global_position
+	link.global_position = new_position
 	if (link.global_position - grapple_line.end).length() < .5: return
 	link.look_at(grapple_line.end)
 
