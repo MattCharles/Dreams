@@ -80,5 +80,3 @@ skeleton = NodePath("../..")
 
 [node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D/GrappleHand"]
 target_position = Vector3(0, 0, -1)
-
-[connection signal="isSprinting" from="." to="Neck/Camera3D" method="_on_player_is_sprinting"]
