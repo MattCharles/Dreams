@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://chkkys4p7l1vq"]
+[gd_scene load_steps=12 format=3 uid="uid://chkkys4p7l1vq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i2x1c"]
 [ext_resource type="Script" path="res://Scripts/PlayerCam.gd" id="2_ds1lf"]
 [ext_resource type="Shader" path="res://Materials/Shaders/Action.gdshader" id="2_kemrt"]
+[ext_resource type="AudioStream" uid="uid://xy2yy8dpxrb6" path="res://Sound/stepSoundFx.mp3" id="4_ua4a4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stwf7"]
 
@@ -80,5 +81,8 @@ skeleton = NodePath("../..")
 
 [node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D/GrappleHand"]
 target_position = Vector3(0, 0, -1)
+
+[node name="WalkingFxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ua4a4")
 
 [connection signal="isSprinting" from="." to="Neck/Camera3D" method="_on_player_is_sprinting"]
