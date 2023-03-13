@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b30ixqckg1j5c"]
+[gd_scene load_steps=7 format=3 uid="uid://cggxxqc73sydy"]
 
 [ext_resource type="Script" path="res://Scripts/main-menu.gd" id="1_nvooe"]
 [ext_resource type="FontFile" uid="uid://cwy1n1rvwjg5r" path="res://Fonts/AlienEncounters/SFAlienEncounters.ttf" id="2_pm4sq"]

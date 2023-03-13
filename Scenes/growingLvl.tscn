@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://dkid2gc2gp42p"]
+
+[ext_resource type="Script" path="res://Scripts/GrowingObject.gd" id="1_7un57"]
+[ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="3_7ep5q"]
+[ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="4_c68wj"]
+[ext_resource type="PackedScene" uid="uid://bqowc31lhnsxt" path="res://Scenes/finish_line.tscn" id="6_60qoh"]
+[ext_resource type="PackedScene" uid="uid://veevoq7kf5ba" path="res://Scenes/HUD.tscn" id="7_52aym"]
+[ext_resource type="Script" path="res://Scripts/MovingObj.gd" id="8_ij7ss"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fdi5v"]
+sky_material = SubResource("ProceduralSkyMaterial_7rkdn")
+
+[sub_resource type="Environment" id="Environment_rrpnd"]
+background_mode = 2
+sky = SubResource("Sky_fdi5v")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5248x"]
+size = Vector2(20, 20)
+
+[sub_resource type="Skin" id="Skin_xdp1x"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2rya7"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jscit"]
+albedo_color = Color(1, 0.360784, 0.109804, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gxau5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qvnun"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rrpnd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_5248x")
+skin = SubResource("Skin_xdp1x")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_2rya7")
+
+[node name="middle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.928)
+mesh = SubResource("PlaneMesh_5248x")
+skin = SubResource("Skin_xdp1x")
+script = ExtResource("1_7un57")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="middle"]
+script = ExtResource("1_7un57")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="middle/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.47578)
+shape = SubResource("ConcavePolygonShape3D_2rya7")
+script = ExtResource("1_7un57")
+
+[node name="Player" parent="." instance=ExtResource("3_7ep5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14442, 0, 0)
+
+[node name="alter" type="Node3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 4.39247, 0, 0.930135)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="alter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10114, 0.389121, 0.192563)
+material_override = SubResource("StandardMaterial3D_jscit")
+mesh = SubResource("BoxMesh_gxau5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="alter/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="alter/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_qvnun")
+
+[node name="SpinningPizza" parent="." instance=ExtResource("4_c68wj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39247, 1.8818, 1.54584)
+
+[node name="HUD" parent="." instance=ExtResource("7_52aym")]
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(3.01228, 0, 0, 0, 2.92342, 0, 0, 0, 2.94042, -1.087, 2.896, -28.166)
+script = ExtResource("8_ij7ss")
+
+[node name="FinishLine2" parent="Node3D" instance=ExtResource("6_60qoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node3D/FinishLine2"]
+transform = Transform3D(0.333333, 0, 0, 0, 0.333333, 0, 0, 0, 0.333333, -0.457399, -1.09414, -0.716845)
+
+[connection signal="screen_entered" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="middle" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_entered" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="middle/StaticBody3D" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_entered" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="middle/StaticBody3D/CollisionShape3D" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_entered" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="Node3D" method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="middle" method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="screen_exited" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="middle/StaticBody3D/CollisionShape3D" method="_on_visible_on_screen_notifier_3d_screen_exited"]
+[connection signal="screen_exited" from="Node3D/FinishLine2/VisibleOnScreenNotifier3D" to="Node3D" method="_on_visible_on_screen_notifier_3d_screen_exited"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxxuk777pq0cd"]
+
+[ext_resource type="PackedScene" uid="uid://dfkjih3x8n5tv" path="res://Assets/raw/skateboard.glb" id="1_5fe0g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67kuq"]
+size = Vector3(2.93858, 0.446135, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="VehicleBody3D" type="VehicleBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VehicleBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000272572, -0.00666529, -0.0144728)
+shape = SubResource("BoxShape3D_67kuq")
+
+[node name="skateboard" parent="VehicleBody3D/CollisionShape3D" instance=ExtResource("1_5fe0g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.140657, 0)
+
+[node name="frontRightWheel" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.765366, -0.163548, 0.271509)
+
+[node name="backright" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.725516, -0.190223, -0.49201)
+
+[node name="frontright" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.760519, -0.14934, -0.518326)
+
+[node name="frontleft" type="VehicleWheel3D" parent="VehicleBody3D"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -0.718363, -0.12744, 0.381081)
