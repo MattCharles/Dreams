@@ -77,6 +77,19 @@ shape = SubResource("BoxShape3D_vkfeq")
 mesh = SubResource("BoxMesh_34iys")
 skeleton = NodePath("../..")
 
+[node name="box8" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.3247, 11.3375, 0.951813)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box8"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box8"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
 [node name="box7" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84572, -5.60137, -23.9303)
 gravity_scale = 0.0

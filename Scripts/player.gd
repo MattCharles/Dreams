@@ -13,6 +13,7 @@ signal isSprinting(bool)
 const GRAPPLE_DISTANCE := 500
 @onready var grapple_cast := $Neck/Camera3D/GrappleHand/RayCast3D
 
+# A pair of vectors that defines a line.
 class VectorPair:
 	var start:Vector3 = Vector3.ZERO
 	var end:Vector3 = Vector3.ZERO
@@ -50,6 +51,7 @@ var lockedCam = false
 var groundedMovementThisFrame = false
 @export
 var lastWalkingSfxPosition = 0;
+var noise:= false
 
 
 func _ready():
@@ -99,10 +101,10 @@ func drop_object():
 
 func _physics_process(delta: float) -> void:
 	grapple_line.start = grapple_hand.global_position
+	if hooking: resize_chain()
 	var links_in_chain = chain_links.size()
 	for i in links_in_chain:
 		position_link(chain_links[i], i+1, links_in_chain)
-		pass
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -140,60 +142,65 @@ func _physics_process(delta: float) -> void:
 				chain_links.pop_front().queue_free()
 			hooking = false
 			return
-		#var this_pizza := chain_link.instantiate()
-		#get_parent().add_child(this_pizza)
-		#this_pizza.position = grapple_hand.global_position
-		#var launch_vector = (interaction.target_position - interaction.position).normalized()
-		#var launch_vector = camera.get_global_transform().basis
 		if grapple_cast.is_colliding():
 			grapple_line.end = grapple_cast.get_collision_point()
 			print(grapple_line.get_distance())
 			hooking = true
 			shoot_hook()
-		#this_pizza.shoot(-launch_vector.z, camera.get_global_rotation_degrees())
+		
 	
-
-	if(velocity.y == 0 and (velocity.x != 0 or velocity.z != 0)):
-		if (not $WalkingFxPlayer.playing):
-			var walkingFxLength = $WalkingFxPlayer.stream.get_length()
-			if (lastWalkingSfxPosition == walkingFxLength):
-					lastWalkingSfxPosition = 0;
-			
-			if (not $WalkingFxPlayer.has_stream_playback()):
-				$WalkingFxPlayer.play()
-					
-			print(lastWalkingSfxPosition)
-			$WalkingFxPlayer.stream_paused = false
-	else:
-		lastWalkingSfxPosition = $WalkingFxPlayer.get_playback_position()
-		print("stopping playingback at " + str(lastWalkingSfxPosition))
-		$WalkingFxPlayer.stream_paused = true
+	if(noise):
+		if(velocity.y == 0 and (velocity.x != 0 or velocity.z != 0)):
+			if (not $WalkingFxPlayer.playing):
+				var walkingFxLength = $WalkingFxPlayer.stream.get_length()
+				if (lastWalkingSfxPosition == walkingFxLength):
+						lastWalkingSfxPosition = 0;
+				
+				if (not $WalkingFxPlayer.has_stream_playback()):
+					$WalkingFxPlayer.play()
+						
+				print(lastWalkingSfxPosition)
+				$WalkingFxPlayer.stream_paused = false
+		else:
+			lastWalkingSfxPosition = $WalkingFxPlayer.get_playback_position()
+			print("stopping playingback at " + str(lastWalkingSfxPosition))
+			$WalkingFxPlayer.stream_paused = true
 		
 		
 	move_and_slide()
 
 func shoot_hook():
-	print("shooting hook from " + str(grapple_line.start) + " to " + str(grapple_line.end))
 	var num_links = num_links_necessary()
 	for n in range(1, num_links):
-		var new_link := chain_link.instantiate()
-		get_tree().get_root().add_child(new_link)
-		chain_links.push_back(new_link)
-		#new_link.global_position = (grapple_line.end - grapple_line.start) * (float(n) / num_links) + grapple_hand.global_position
-		position_link(new_link, n, num_links)
-		new_link.global_rotate(grapple_line.get_normalized_line(), 90)
+		add_link_to_chain(n, num_links)
+
+func resize_chain() -> void:
+	var necessary_links := num_links_necessary()
+	if chain_links.size() == necessary_links:
+		return
+	while chain_links.size() > necessary_links:
+		chain_links.pop_back().queue_free()
+	var num_links_added := 0
+	while chain_links.size() < necessary_links:
+		add_link_to_chain(chain_links.size() + num_links_added, necessary_links)
+		num_links_added += 1
+		
+
+func add_link_to_chain(link_index, num_links) -> void:
+	var new_link := chain_link.instantiate()
+	get_tree().get_root().add_child(new_link)
+	chain_links.push_back(new_link)
+	position_link(new_link, link_index, num_links)
 
 func num_links_necessary() -> int:
 	var distance = grapple_line.get_distance()
-	print("distance: " + str(distance))
-	print("link_height: " + str(link_height))
 	var result = ceil(distance / link_height)
-	print("resulting divide: " + str(result))
 	return result
 	
 func position_link(link, index:int, num_links_in_chain:int):
 	link.global_position = grapple_line.get_line() * (float(index) / num_links_in_chain) + grapple_hand.global_position
-	link.global_rotate(grapple_line.get_normalized_line(), 0)
+	if (link.global_position - grapple_line.end).length() < .5: return
+	link.look_at(grapple_line.end)
 
 func respawn(spawn_point:Vector3):
 	velocity = Vector3.ZERO
