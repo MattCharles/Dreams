@@ -53,6 +53,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var staticBody = $Neck/Camera3D/StaticBody3D
 @onready var grapple_hand := $Neck/Camera3D/GrappleHand
 
+
 var picked_object
 var pull_power = 7
 var rotation_power =0.05
