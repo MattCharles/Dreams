@@ -11,7 +11,7 @@ signal isSprinting(bool)
 
 @onready var chain_link := preload("res://Scenes/rope.tscn")
 const GRAPPLE_DISTANCE := 500
-const GRAPPLE_PULL_SPEED := 20
+const GRAPPLE_ACCELERATION := .5
 @onready var grapple_cast := $Neck/Camera3D/GrappleHand/RayCast3D
 
 # A pair of vectors that defines a line.
@@ -35,6 +35,13 @@ var link_height := .2 #TODO: The chain itself should be able to provide this inf
 var original_hook_distance := 0.0
 var grapple_chain_fully_extended := false
 var num_air_jumps := 2
+
+# Used to smooth velocity when the user is at the edge of the grappling hook.
+var slerping_velocity := false
+var slerp_start := Vector3.ZERO
+var slerp_target := Vector3.ZERO
+var slerp_ms_counter := 0
+const TIME_TO_SLERP := .5 # funniest unironic variable name i've made in a while
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -97,7 +104,6 @@ func pick_object():
 		picked_object = collider
 		joint.set_node_b(picked_object.get_path())
 		
-		
 func drop_object():
 	if picked_object != null:
 		picked_object = null
@@ -111,6 +117,7 @@ func try_jump() -> bool:
 		else:
 			return false
 	return true
+	
 
 func _physics_process(delta: float) -> void:
 	grapple_line.start = grapple_hand.global_position
@@ -121,7 +128,7 @@ func _physics_process(delta: float) -> void:
 	for i in links_in_chain:
 		position_link(chain_links[i], i+1, links_in_chain)
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not slerping_velocity:
 		velocity.y -= gravity * delta
 	else:
 		num_air_jumps = 1
@@ -163,10 +170,10 @@ func _physics_process(delta: float) -> void:
 		var point_to_hook = global_position.direction_to(grapple_line.end)
 		var original_magnitude = velocity.length()
 		var new_rotation_axis = velocity.normalized().cross(point_to_hook)
-		var rotated_velocity = velocity.rotated(new_rotation_axis.normalized(), deg_to_rad(90))
+		new_rotation_axis = new_rotation_axis.normalized()
+		var rotated_velocity = velocity.rotated(new_rotation_axis, deg_to_rad(90))
 		rotated_velocity *= .9
 		velocity = rotated_velocity
-		pass
 		
 	if picked_object != null:
 		var a = picked_object.global_transform.origin
@@ -180,7 +187,7 @@ func _physics_process(delta: float) -> void:
 			grapple_chain_is_out = true
 			shoot_hook()
 	if Input.is_action_pressed("shoot") and grapple_chain_is_out:
-		velocity = (velocity + 20 * global_position.direction_to(grapple_line.end)).normalized() * GRAPPLE_PULL_SPEED
+		velocity += (velocity + 20 * global_position.direction_to(grapple_line.end)).normalized() * GRAPPLE_ACCELERATION
 		original_hook_distance = grapple_line.get_distance()
 		
 	
