@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://chkkys4p7l1vq"]
+[gd_scene load_steps=12 format=3 uid="uid://chkkys4p7l1vq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_i2x1c"]
 [ext_resource type="Script" path="res://Scripts/PlayerCam.gd" id="2_ds1lf"]
 [ext_resource type="Shader" path="res://Materials/Shaders/Action.gdshader" id="2_kemrt"]
+[ext_resource type="AudioStream" uid="uid://xy2yy8dpxrb6" path="res://Sound/stepSoundFx.mp3" id="4_ua4a4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_stwf7"]
 
@@ -27,6 +28,10 @@ shader_parameter/mask_size = 0.0
 shader_parameter/mask_edge = 0.804
 shader_parameter/animation_speed = 12.929
 shader_parameter/noise = SubResource("NoiseTexture2D_dmdms")
+
+[sub_resource type="SphereMesh" id="SphereMesh_myxy3"]
+radius = 0.1
+height = 0.2
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_i2x1c")
@@ -68,5 +73,16 @@ linear_limit_y/enabled = false
 linear_limit_z/enabled = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Neck/Camera3D"]
+
+[node name="GrappleHand" type="MeshInstance3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.425125, -0.623437, -0.747753)
+mesh = SubResource("SphereMesh_myxy3")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D/GrappleHand"]
+target_position = Vector3(0, 0, -1)
+
+[node name="WalkingFxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ua4a4")
 
 [connection signal="isSprinting" from="." to="Neck/Camera3D" method="_on_player_is_sprinting"]

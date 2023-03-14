@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2w00j5t35vr5"]
+
+[ext_resource type="PackedScene" uid="uid://cl1qidouemmb4" path="res://Assets/raw/chainlink.glb" id="1_0onwu"]
+
+[node name="chainlink" instance=ExtResource("1_0onwu")]
+
+[node name="Chainlink" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.0324745, 0.999473, 0, -0.999473, -0.0324745, 0.00111418, 0, 0)

@@ -10,8 +10,8 @@ func _ready():
 	get_viewport().set_physics_object_picking(true)
 
 func _process(delta):
-	if player.position.y < -10:
+	if player.position.y < -30:
 		player.respawn(player_spawn.position)
-	if pizza.position.y < -10:
+	if pizza.position.y < -30:
 		pizza.position = pizza_spawn.position
 		pizza.linear_velocity = Vector3.ZERO

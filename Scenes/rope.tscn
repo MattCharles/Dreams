@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dadqmy82ifs6o"]
+
+[ext_resource type="PackedScene" path="res://Scenes/chainlink.tscn" id="2_nl6oy"]
+
+[node name="Rope" type="Node3D"]
+
+[node name="Link" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="Mesh" parent="Link" instance=ExtResource("2_nl6oy")]
