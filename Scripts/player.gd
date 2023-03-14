@@ -173,7 +173,7 @@ func _physics_process(delta: float) -> void:
 		var b = hand.global_transform.origin
 		picked_object.set_linear_velocity((b-a)*pull_power)
 
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and not grapple_chain_is_out:
 		if grapple_cast.is_colliding():
 			grapple_line.end = grapple_cast.get_collision_point()
 			original_hook_distance = grapple_line.get_distance()
