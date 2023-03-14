@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://yki14xrx84cy"]
+
+[ext_resource type="Script" path="res://Scenes/pizza_level.gd" id="1_375or"]
+[ext_resource type="PackedScene" uid="uid://cmdls8h5yp63i" path="res://Scenes/big_pizza.tscn" id="1_oy5xn"]
+[ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_g5ycb"]
+[ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="3_5ol8n"]
+[ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="4_8w3ij"]
+[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="5_r7140"]
+
+[sub_resource type="Sky" id="Sky_wit8s"]
+
+[sub_resource type="Environment" id="Environment_g88mi"]
+background_mode = 1
+sky = SubResource("Sky_wit8s")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
+glow_intensity = 1.33
+glow_bloom = 0.35
+fog_enabled = true
+fog_light_color = Color(0.756863, 0.47451, 0.215686, 1)
+fog_light_energy = 0.58
+fog_density = 0.0166
+fog_sky_affect = 0.071
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_6ttxr"]
+
+[node name="pizza_level" type="Node3D"]
+script = ExtResource("1_375or")
+
+[node name="pepperoni_pizza" parent="." instance=ExtResource("1_oy5xn")]
+transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 0, 0, -15.5803)
+
+[node name="Player" parent="." instance=ExtResource("2_g5ycb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762304, -7.22839)
+
+[node name="FinishLine" parent="." instance=ExtResource("3_5ol8n")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.87975, 12.6598, -25.4817)
+
+[node name="SpinningPizza" parent="." instance=ExtResource("4_8w3ij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69128, 10.3083, -13.2842)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0938535, 0.0345184, 1.94534e-09, -0.0335641, 0.0912588, 0.0233513, 0.00806049, -0.021916, 0.0972354, -0.321416, 2.50471, 0)
+light_color = Color(0.713726, 0, 0.0235294, 1)
+light_energy = 11.884
+light_indirect_energy = 1.623
+
+[node name="SpeedrunTimer" parent="." instance=ExtResource("5_r7140")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g88mi")
+camera_attributes = SubResource("CameraAttributesPractical_6ttxr")
+
+[node name="PlayerSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75203, -7.5574)
+
+[node name="PizzaSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86177, 10.6701, -13.5037)

@@ -10,7 +10,7 @@ const JERK_DAMPENING_FACTOR := .7
 @export 
 var SPEED = 5.0
 @export
-var JUMP_VELOCITY = 9
+var JUMP_VELOCITY = 5
 @export 
 var SPRINT_SPEED = 10.0
 
@@ -63,7 +63,7 @@ var groundedMovementThisFrame = false
 @export
 var lastWalkingSfxPosition = 0;
 var noise:= false
-
+var num_jumps := 1
 
 func _ready():
 	grapple_cast.target_position *= GRAPPLE_DISTANCE
@@ -130,8 +130,6 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	else:
-		num_air_jumps = 1
 
 	if Input.is_action_just_pressed("cancel_hook"):
 		if grapple_chain_is_out:

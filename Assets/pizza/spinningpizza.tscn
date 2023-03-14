@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://kvdu4itnqh2e"]
+[gd_scene load_steps=7 format=3 uid="uid://kvdu4itnqh2e"]
 
 [ext_resource type="Script" path="res://Scripts/Pizza.gd" id="1_2ctcm"]
 [ext_resource type="PackedScene" uid="uid://cl2htts5lbsq7" path="res://Assets/raw/pepperoni_pizza.glb" id="1_aq0sq"]
-[ext_resource type="PackedScene" uid="uid://bhx4mvm6pkm52" path="res://Assets/raw/barrel.glb" id="2_4u74p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vqpes"]
 radius = 1.059
@@ -73,7 +72,3 @@ autoplay = "PizzaSpin"
 libraries = {
 "": SubResource("AnimationLibrary_32p2v")
 }
-
-[node name="barrel" parent="." instance=ExtResource("2_4u74p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4725, 0, 0.120395)
-visible = false
