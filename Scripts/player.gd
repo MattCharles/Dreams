@@ -3,7 +3,7 @@ extends CharacterBody3D
 @export 
 var SPEED = 5.0
 @export
-var JUMP_VELOCITY = 4.5
+var JUMP_VELOCITY = 9
 @export 
 var SPRINT_SPEED = 10.0
 
@@ -11,6 +11,7 @@ signal isSprinting(bool)
 
 @onready var chain_link := preload("res://Scenes/rope.tscn")
 const GRAPPLE_DISTANCE := 500
+const GRAPPLE_PULL_SPEED := 20
 @onready var grapple_cast := $Neck/Camera3D/GrappleHand/RayCast3D
 
 # A pair of vectors that defines a line.
@@ -33,6 +34,7 @@ var grapple_chain_is_out := false
 var link_height := .2 #TODO: The chain itself should be able to provide this info. Hard coding for now
 var original_hook_distance := 0.0
 var grapple_chain_fully_extended := false
+var num_air_jumps := 2
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -70,7 +72,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event is InputEventMouseMotion:
 				neck.rotate_y(-event.relative.x * 0.01)
 				camera.rotate_x(-event.relative.y * 0.01)
-				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(60))
+				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89.9), deg_to_rad(89.9))
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if picked_object == null:
 			pick_object()
@@ -101,6 +103,15 @@ func drop_object():
 		picked_object = null
 		joint.set_node_b(joint.get_path())
 
+func try_jump() -> bool:
+	if not is_on_floor():
+		if num_air_jumps > 0:
+			num_air_jumps -= 1
+			return true
+		else:
+			return false
+	return true
+
 func _physics_process(delta: float) -> void:
 	grapple_line.start = grapple_hand.global_position
 	if grapple_chain_is_out: 
@@ -112,10 +123,24 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	else:
+		num_air_jumps = 1
 
+	if Input.is_action_just_pressed("cancel_hook"):
+		if grapple_chain_is_out:
+			while not chain_links.is_empty():
+				chain_links.pop_front().queue_free()
+			grapple_chain_is_out = false
+			original_hook_distance = 0
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump"):
+		if grapple_chain_is_out:
+			while not chain_links.is_empty():
+				chain_links.pop_front().queue_free()
+			grapple_chain_is_out = false
+			original_hook_distance = 0
+		if try_jump():
+			velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -131,15 +156,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * movementSpeedThisFrame
 		velocity.z = direction.z * movementSpeedThisFrame
 		isSprinting.emit(sprinting) # Player sprinted this frame
-	else:	
-		velocity.x = move_toward(velocity.x, 0, SPEED) 
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	if is_on_floor():	
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta) 
+		velocity.z = move_toward(velocity.z, 0, SPEED * delta)
 	if grapple_chain_fully_extended:
-		var dir = global_position.direction_to(grapple_line.end)
+		var point_to_hook = global_position.direction_to(grapple_line.end)
 		var original_magnitude = velocity.length()
-		var new_rotation_axis = velocity.normalized().cross(dir)
+		var new_rotation_axis = velocity.normalized().cross(point_to_hook)
 		var rotated_velocity = velocity.rotated(new_rotation_axis.normalized(), deg_to_rad(90))
-		print("OM: " + str(original_magnitude) + " new: " + str(rotated_velocity.length()))
+		rotated_velocity *= .9
 		velocity = rotated_velocity
 		pass
 		
@@ -149,20 +174,14 @@ func _physics_process(delta: float) -> void:
 		picked_object.set_linear_velocity((b-a)*pull_power)
 
 	if Input.is_action_just_pressed("shoot"):
-		if grapple_chain_is_out:
-			while not chain_links.is_empty():
-				chain_links.pop_front().queue_free()
-			grapple_chain_is_out = false
-			original_hook_distance = 0
-			return
 		if grapple_cast.is_colliding():
 			grapple_line.end = grapple_cast.get_collision_point()
-			original_hook_distance = grapple_line.get_distance() + .5
+			original_hook_distance = grapple_line.get_distance()
 			grapple_chain_is_out = true
 			shoot_hook()
 	if Input.is_action_pressed("shoot") and grapple_chain_is_out:
-		velocity = global_position.direction_to(grapple_line.end) * SPEED
-		original_hook_distance = grapple_line.get_distance() + .5
+		velocity = (velocity + 20 * global_position.direction_to(grapple_line.end)).normalized() * GRAPPLE_PULL_SPEED
+		original_hook_distance = grapple_line.get_distance()
 		
 	
 	if(noise):
@@ -186,6 +205,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func shoot_hook():
+	num_air_jumps = 2
 	var num_links = num_links_necessary()
 	for n in range(1, num_links):
 		add_link_to_chain(n, num_links)
