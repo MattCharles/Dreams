@@ -64,6 +64,8 @@ var groundedMovementThisFrame = false
 var lastWalkingSfxPosition = 0;
 var noise:= false
 var num_jumps := 1
+const COYOTE_LIMIT := .5
+var airtime := 0.0
 
 func _ready():
 	grapple_cast.target_position *= GRAPPLE_DISTANCE
@@ -115,7 +117,7 @@ func try_jump() -> bool:
 			num_air_jumps -= 1
 			return true
 		else:
-			return false
+			return airtime < COYOTE_LIMIT
 	return true
 	
 
@@ -129,7 +131,11 @@ func _physics_process(delta: float) -> void:
 		position_link(chain_links[i], i+1, links_in_chain)
 	# Add the gravity.
 	if not is_on_floor():
+		airtime += delta
 		velocity.y -= gravity * delta
+	else:
+		num_air_jumps = 2
+		airtime = 0.0
 
 	if Input.is_action_just_pressed("cancel_hook"):
 		if grapple_chain_is_out:
