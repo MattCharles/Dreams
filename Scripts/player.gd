@@ -241,7 +241,7 @@ func resize_chain() -> void:
 # This will allow us to call position_link() again gracefully later.
 func add_link_to_chain(link_index, num_links) -> void:
 	var new_link := chain_link.instantiate()
-	get_tree().get_root().add_child(new_link) #Add the link to the scene
+	get_parent().add_child(new_link) #Add the link to the scene
 	chain_links.push_back(new_link)
 	position_link(new_link, link_index, num_links)
 

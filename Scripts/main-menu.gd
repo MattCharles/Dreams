@@ -54,8 +54,8 @@ func paint_menu():
 	start()
 	
 func pizza():
-	var pizza_position_tween = get_tree().create_tween()
-	var pizza_alpha_tween = get_tree().create_tween()
+	var pizza_position_tween = pizza_label.create_tween()
+	var pizza_alpha_tween = pizza_label.create_tween()
 	pizza_position_tween.tween_property(pizza_label, "position",
 			pizza_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	pizza_alpha_tween.tween_property(pizza_label, "modulate", Color(1, 1, 1, 1), 1).set_ease(Tween.EASE_IN)
@@ -63,15 +63,15 @@ func pizza():
 	pizza_position_tween.tween_callback(dream)
 
 func dream():
-	var dream_tween = get_tree().create_tween()
+	var dream_tween = dream_label.create_tween()
 	dream_tween.set_parallel(true)
 	dream_tween.tween_property(dream_label, "position",
 			dream_target.position, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .2).set_ease(Tween.EASE_IN)
 
 func tween_dream():
-	var select_button_tween = get_tree().create_tween()
-	var position_tween = get_tree().create_tween()
+	var select_button_tween = select_button.create_tween()
+	var position_tween = select_button.create_tween()
 	position_tween.tween_property(select_button, "position",
 			select_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	select_button_tween.tween_property(select_button, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
@@ -79,8 +79,8 @@ func tween_dream():
 	select_button_tween.tween_callback(options)
 
 func start():
-	var start_button_tween = get_tree().create_tween()
-	var position_tween = get_tree().create_tween()
+	var start_button_tween = start_button.create_tween()
+	var position_tween = start_button.create_tween()
 	position_tween.tween_property(start_button, "position",
 			start_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	start_button_tween.tween_property(start_button, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
@@ -89,8 +89,8 @@ func start():
 	
 
 func options():
-	var options_button_tween = get_tree().create_tween()
-	var position_tween = get_tree().create_tween()
+	var options_button_tween = options_button.create_tween()
+	var position_tween = options_button.create_tween()
 	position_tween.tween_property(options_button, "position",
 			options_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	options_button_tween.tween_property(options_button, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
@@ -98,8 +98,8 @@ func options():
 	options_button_tween.tween_callback(quit)
 	
 func quit():
-	var quit_button_tween = get_tree().create_tween()
-	var position_tween = get_tree().create_tween()
+	var quit_button_tween = quit_button.create_tween()
+	var position_tween = quit_button.create_tween()
 	quit_button_tween.set_parallel(true)
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
@@ -115,32 +115,32 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_start_mouse_entered():
-	var position_tween = get_tree().create_tween()
+	var position_tween = start_button.create_tween()
 	position_tween.tween_property(start_button, "position",
 			start_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _on_options_mouse_entered():
-	var position_tween = get_tree().create_tween()
+	var position_tween = options_button.create_tween()
 	position_tween.tween_property(options_button, "position",
 			options_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _on_quit_mouse_entered():
-	var position_tween = get_tree().create_tween()
+	var position_tween = quit_button.create_tween()
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _on_start_mouse_exited():
-	var position_tween = get_tree().create_tween()
+	var position_tween = start_button.create_tween()
 	position_tween.tween_property(start_button, "position",
 			start_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _on_options_mouse_exited():
-	var position_tween = get_tree().create_tween()
+	var position_tween = options_button.create_tween()
 	position_tween.tween_property(options_button, "position",
 			options_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 func _on_quit_mouse_exited():
-	var position_tween = get_tree().create_tween()
+	var position_tween = quit_button.create_tween()
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
@@ -150,12 +150,12 @@ func _on_level_select_pressed():
 
 
 func _on_level_select_mouse_entered():
-	var position_tween = get_tree().create_tween()
+	var position_tween = select_button.create_tween()
 	position_tween.tween_property(select_button, "position",
 			select_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
 
 func _on_level_select_mouse_exited():
-	var position_tween = get_tree().create_tween()
+	var position_tween = select_button.create_tween()
 	position_tween.tween_property(select_button, "position",
 			select_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
