@@ -76,6 +76,32 @@ offset_top = 100.0
 offset_right = 500.0
 offset_bottom = 100.0
 
+[node name="LevelSelect" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 250.0
+offset_top = -270.0
+offset_right = 790.0
+offset_bottom = -211.0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../Quit")
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_right = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Quit")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.807843, 0.772549, 1, 1)
+theme_override_colors/font_hover_color = Color(0.996078, 0.870588, 0.878431, 1)
+theme_override_fonts/font = ExtResource("4_t56s4")
+theme_override_font_sizes/font_size = 64
+text = "Select"
+flat = true
+alignment = 0
+
 [node name="Start" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -163,6 +189,15 @@ offset_top = -200.0
 offset_bottom = -200.0
 grow_vertical = 0
 
+[node name="LevelSelectTarget" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -270.0
+offset_bottom = -270.0
+grow_vertical = 0
+
 [node name="OptionsTarget" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 2
@@ -187,6 +222,9 @@ stream = ExtResource("5_1s0hb")
 [node name="LoopedPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_22rpp")
 
+[connection signal="mouse_entered" from="LevelSelect" to="." method="_on_level_select_mouse_entered"]
+[connection signal="mouse_exited" from="LevelSelect" to="." method="_on_level_select_mouse_exited"]
+[connection signal="pressed" from="LevelSelect" to="." method="_on_level_select_pressed"]
 [connection signal="mouse_entered" from="Start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="Start" to="." method="_on_start_mouse_exited"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

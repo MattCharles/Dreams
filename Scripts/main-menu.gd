@@ -6,10 +6,12 @@ extends Control
 @onready var pizza_target = $PizzaTarget
 @onready var dream_target = $DreamTarget
 
+@onready var select_button = $LevelSelect
 @onready var start_button = $Start
 @onready var options_button = $Options
 @onready var quit_button = $Quit
 
+@onready var select_target = $LevelSelectTarget
 @onready var start_target = $StartTarget
 @onready var options_target = $OptionsTarget
 @onready var quit_target = $QuitTarget
@@ -68,6 +70,15 @@ func dream():
 	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .2).set_ease(Tween.EASE_IN)
 
 func start():
+	var select_button_tween = get_tree().create_tween()
+	var position_tween = get_tree().create_tween()
+	position_tween.tween_property(select_button, "position",
+			select_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	select_button_tween.tween_property(select_button, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
+	
+	select_button_tween.tween_callback(tween_dream)
+
+func tween_dream():
 	var start_button_tween = get_tree().create_tween()
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(start_button, "position",
@@ -76,6 +87,7 @@ func start():
 	
 	start_button_tween.tween_callback(options)
 	
+
 func options():
 	var options_button_tween = get_tree().create_tween()
 	var position_tween = get_tree().create_tween()
@@ -131,3 +143,19 @@ func _on_quit_mouse_exited():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+
+
+func _on_level_select_pressed():
+	get_tree().change_scene_to_file("res://Scenes/LevelSelect.tscn")
+
+
+func _on_level_select_mouse_entered():
+	var position_tween = get_tree().create_tween()
+	position_tween.tween_property(select_button, "position",
+			select_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+
+
+func _on_level_select_mouse_exited():
+	var position_tween = get_tree().create_tween()
+	position_tween.tween_property(select_button, "position",
+			select_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
