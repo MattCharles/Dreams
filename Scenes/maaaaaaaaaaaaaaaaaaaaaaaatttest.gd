@@ -9,10 +9,11 @@ extends Node3D
 @onready var finish_line := $FinishLine
 
 func _ready():
+	$"/root/GameData".current_level = 3
 	finish_line.finished.connect(go_to_next_scene)
 	get_viewport().set_physics_object_picking(true)
 
-func _process(delta):
+func _process(_delta):
 	if player.position.y < -30:
 		player.respawn(player_spawn.position)
 	if pizza.position.y < -30:

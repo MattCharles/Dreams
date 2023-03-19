@@ -7,6 +7,7 @@ extends Node3D
 @onready var pizza_spawn := $PizzaSpawn
 
 func _ready():
+	$"/root/GameData".current_level = 2
 	get_viewport().set_physics_object_picking(true)
 
 func _process(_delta):

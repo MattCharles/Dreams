@@ -9,6 +9,7 @@ extends Node3D
 @onready var finish_line := $FinishLine
 
 func _ready():
+	$"/root/GameData".current_level = 1
 	finish_line.finished.connect(go_to_next_scene)
 	get_viewport().set_physics_object_picking(true)
 
