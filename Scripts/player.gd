@@ -53,6 +53,7 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var staticBody = $Neck/Camera3D/StaticBody3D
 @onready var grapple_hand := $Neck/Camera3D/GrappleHand
 
+
 var picked_object
 var pull_power = 7
 var rotation_power =0.05
@@ -81,7 +82,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				neck.rotate_y(-event.relative.x * 0.01)
 				camera.rotate_x(-event.relative.y * 0.01)
 				camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89.9), deg_to_rad(89.9))
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_action_just_pressed("grab"):
 		if picked_object == null:
 			pick_object()
 		elif picked_object != null:

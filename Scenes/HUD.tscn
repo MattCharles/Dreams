@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c3ik8rt0mywib" path="res://Assets/2d/crosshair180.png" id="1_16y7l"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_lkfk1"]
-[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="2_suavb"]
+[ext_resource type="PackedScene" uid="uid://c8cmcs41uwrr3" path="res://Scenes/speedrun_timer.tscn" id="2_suavb"]
 
 [node name="HUD" type="Control"]
 visible = false
