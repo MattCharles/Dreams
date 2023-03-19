@@ -10,7 +10,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	if Input.is_action_pressed("forward") and isVisible:
+	if Input.is_action_pressed("forward") and Input.is_action_pressed("sprint") and isVisible:
+		transform.origin.z = transform.origin.z - .16
+	
+	elif Input.is_action_pressed("forward") and isVisible:
 		transform.origin.z = transform.origin.z - .08
 	pass
 	

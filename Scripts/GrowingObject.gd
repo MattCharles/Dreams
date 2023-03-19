@@ -15,16 +15,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if Input.is_action_pressed("forward") and isVisible:
+	if Input.is_action_pressed("forward") and Input.is_action_pressed("sprint") and isVisible:
+		transform.basis.z = transform.basis.z + Vector3(0,0,.016)
+	
+	elif Input.is_action_pressed("forward") and isVisible:
 		transform.basis.z = transform.basis.z + Vector3(0,0,.008)
-	pass
-	
-func _input(event):
-	
-	if event.is_action_pressed("Grow"):
-		transform.basis.z = transform.basis.z +Vector3(0,0,1)
-	
 		
+
+	pass
+
 
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	isVisible = true
