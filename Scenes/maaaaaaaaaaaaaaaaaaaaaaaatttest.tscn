@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/maaaaaaaaaaaaaaaaaaaaaaaatttest.gd" id="1_krs41"]
 [ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_pmujm"]
 [ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="3_l6ltx"]
-[ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="4_rgyji"]
+[ext_resource type="PackedScene" uid="uid://bqowc31lhnsxt" path="res://Scenes/finish_line.tscn" id="4_rgyji"]
 [ext_resource type="PackedScene" uid="uid://bsmww825t258y" path="res://Scenes/HUD.tscn" id="5_qrrxh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]

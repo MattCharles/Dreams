@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scenes/pizza_level.gd" id="1_375or"]
 [ext_resource type="PackedScene" uid="uid://cmdls8h5yp63i" path="res://Scenes/big_pizza.tscn" id="1_oy5xn"]
 [ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_g5ycb"]
-[ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="3_5ol8n"]
+[ext_resource type="PackedScene" uid="uid://bqowc31lhnsxt" path="res://Scenes/finish_line.tscn" id="3_5ol8n"]
 [ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="4_8w3ij"]
-[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="5_r7140"]
+[ext_resource type="PackedScene" uid="uid://c8cmcs41uwrr3" path="res://Scenes/speedrun_timer.tscn" id="5_r7140"]
 [ext_resource type="PackedScene" uid="uid://bye5654i35qft" path="res://Assets/raw/oven.glb" id="7_m5igx"]
 [ext_resource type="AudioStream" uid="uid://tdyvrvebiyxi" path="res://Sound/Music/loopy_tunes_spoopy_of_course.wav" id="8_0phil"]
 
