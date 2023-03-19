@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkqe4b8s7l6o0"]
+[gd_scene load_steps=14 format=3 uid="uid://dkqe4b8s7l6o0"]
 
 [ext_resource type="Texture2D" uid="uid://cn1ri3xkce317" path="res://Assets/2d/level_previews/pizza_level.png" id="1_6e1d4"]
 [ext_resource type="Script" path="res://Scenes/LevelSelect.gd" id="1_iv6t7"]
 [ext_resource type="PackedScene" uid="uid://yki14xrx84cy" path="res://Scenes/pizza_level.tscn" id="2_dg18m"]
+[ext_resource type="PackedScene" uid="uid://s5rk7r7kl4jl" path="res://Scenes/intro.tscn" id="2_w8mmt"]
+[ext_resource type="PackedScene" uid="uid://dd5qym13hrhhd" path="res://Scenes/matttest.tscn" id="3_0nd87"]
 [ext_resource type="Texture2D" uid="uid://d1c5fk1d825eu" path="res://Assets/2d/level_previews/intro.png" id="3_yrjoo"]
 [ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="4_mybxu"]
+[ext_resource type="PackedScene" uid="uid://blpr8kc3qthqn" path="res://Scenes/maaaaaaaaaaaaaaaaaaaaaaaatttest.tscn" id="5_7xixl"]
 [ext_resource type="Texture2D" uid="uid://dpowyl24slmx" path="res://Assets/2d/level_previews/matt.png" id="5_7xt6d"]
 [ext_resource type="Texture2D" uid="uid://bwmch2oym1r72" path="res://Assets/2d/level_previews/the_long_way.png" id="7_fkvst"]
 [ext_resource type="FontFile" uid="uid://cwy1n1rvwjg5r" path="res://Fonts/AlienEncounters/SFAlienEncounters.ttf" id="8_ncmuh"]
@@ -23,7 +26,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iv6t7")
-levels = Array[PackedScene]([ExtResource("2_dg18m")])
+levels = Array[PackedScene]([ExtResource("2_w8mmt"), ExtResource("3_0nd87"), ExtResource("2_dg18m"), ExtResource("5_7xixl")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -38,6 +41,7 @@ alignment = 1
 [node name="Level1" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Level1Button" type="TextureButton" parent="HBoxContainer/Level1"]
 layout_mode = 1
@@ -61,6 +65,7 @@ offset_top = -236.5
 offset_right = 477.0
 offset_bottom = -148.5
 grow_vertical = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("8_ncmuh")
 theme_override_font_sizes/font_size = 28
 text = "Intro"
@@ -83,11 +88,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.698039)
 
 [node name="Level2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Level2Button" type="TextureButton" parent="HBoxContainer/Level2"]
 layout_mode = 1
@@ -111,6 +118,7 @@ offset_top = -236.5
 offset_right = 477.0
 offset_bottom = -148.5
 grow_vertical = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("8_ncmuh")
 theme_override_font_sizes/font_size = 28
 text = "Play"
@@ -133,11 +141,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.698039)
 
 [node name="Level3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Level3Button" type="TextureButton" parent="HBoxContainer/Level3"]
 layout_mode = 1
@@ -161,6 +171,7 @@ offset_top = -236.5
 offset_right = 477.0
 offset_bottom = -148.5
 grow_vertical = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("8_ncmuh")
 theme_override_font_sizes/font_size = 28
 text = "Pizza Level
@@ -184,11 +195,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.698039)
 
 [node name="Level4" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 
 [node name="Level4Button" type="TextureButton" parent="HBoxContainer/Level4"]
 layout_mode = 1
@@ -212,6 +225,7 @@ offset_top = -236.5
 offset_right = 477.0
 offset_bottom = -148.5
 grow_vertical = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("8_ncmuh")
 theme_override_font_sizes/font_size = 28
 text = "The Looong Way
@@ -235,6 +249,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.698039)
 
 [node name="MainMenu" type="Button" parent="."]
@@ -257,6 +272,7 @@ text = "Main Menu"
 flat = true
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -264,6 +280,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+auto_translate = false
 color = Color(0, 0, 0, 0.870588)
 
 [connection signal="pressed" from="HBoxContainer/Level1/Level1Button" to="." method="_on_pizza_level_button_pressed"]
