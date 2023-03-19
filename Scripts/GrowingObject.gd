@@ -25,21 +25,12 @@ func _input(event):
 		transform.basis.z = transform.basis.z +Vector3(0,0,1)
 	
 		
-		
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("Grow"):
-		print("trying to grow")
-		
-
 
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	isVisible = true
-	print("visible")
 	pass # Replace with function body.
 
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	isVisible = false
-	print("NOT visible")
 	pass # Replace with function body.

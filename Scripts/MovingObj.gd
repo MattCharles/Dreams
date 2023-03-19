@@ -16,12 +16,10 @@ func _process(delta):
 	
 func _on_visible_on_screen_notifier_3d_screen_entered():
 	isVisible = true
-	print("should move?")
 	pass # Replace with function body.
 
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	isVisible = false
-	print("NOT Moving")
 	pass # Replace with function body.
 
