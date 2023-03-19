@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkqe4b8s7l6o0"]
+[gd_scene load_steps=10 format=3 uid="uid://dkqe4b8s7l6o0"]
 
 [ext_resource type="Texture2D" uid="uid://cn1ri3xkce317" path="res://Assets/2d/level_previews/pizza_level.png" id="1_6e1d4"]
 [ext_resource type="Script" path="res://Scenes/LevelSelect.gd" id="1_iv6t7"]
 [ext_resource type="PackedScene" uid="uid://yki14xrx84cy" path="res://Scenes/pizza_level.tscn" id="2_dg18m"]
+[ext_resource type="Texture2D" uid="uid://d1c5fk1d825eu" path="res://Assets/2d/level_previews/intro.png" id="3_yrjoo"]
 [ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="4_mybxu"]
+[ext_resource type="Texture2D" uid="uid://dpowyl24slmx" path="res://Assets/2d/level_previews/matt.png" id="5_7xt6d"]
+[ext_resource type="Texture2D" uid="uid://bwmch2oym1r72" path="res://Assets/2d/level_previews/the_long_way.png" id="7_fkvst"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4idcl"]
 font_size = 48
@@ -23,30 +26,29 @@ levels = Array[PackedScene]([ExtResource("2_dg18m")])
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -900.0
-offset_top = 361.0
-offset_right = 900.0
-offset_bottom = 841.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-theme_override_constants/separation = 660
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
 
 [node name="Level1" type="Control" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Level1Button" type="TextureButton" parent="HBoxContainer/Level1"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -537.5
+offset_top = -540.0
 offset_right = 1920.0
-offset_bottom = 542.5
+offset_bottom = 540.0
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("1_6e1d4")
+texture_normal = ExtResource("3_yrjoo")
 stretch_mode = 0
 
 [node name="Level1Label" type="Label" parent="HBoxContainer/Level1"]
@@ -58,8 +60,7 @@ offset_top = -236.5
 offset_right = 477.0
 offset_bottom = -148.5
 grow_vertical = 2
-text = "Pizza Level
-"
+text = "Intro"
 label_settings = SubResource("LabelSettings_4idcl")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -71,21 +72,7 @@ offset_bottom = 71.52
 
 [node name="Level2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
-
-[node name="Level2Label" type="Label" parent="HBoxContainer/Level2"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -236.5
-offset_right = 477.0
-offset_bottom = -148.5
-grow_vertical = 2
-text = "Pizza Level
-"
-label_settings = SubResource("LabelSettings_4idcl")
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 3
 
 [node name="Level2Button" type="TextureButton" parent="HBoxContainer/Level2"]
 layout_mode = 1
@@ -97,8 +84,22 @@ offset_right = 1920.0
 offset_bottom = 543.5
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("1_6e1d4")
+texture_normal = ExtResource("5_7xt6d")
 stretch_mode = 0
+
+[node name="Level2Label" type="Label" parent="HBoxContainer/Level2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -236.5
+offset_right = 477.0
+offset_bottom = -148.5
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_4idcl")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpeedrunTimer" parent="HBoxContainer/Level2" instance=ExtResource("4_mybxu")]
 layout_mode = 1
@@ -109,6 +110,20 @@ offset_bottom = 74.52
 
 [node name="Level3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Level3Button" type="TextureButton" parent="HBoxContainer/Level3"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -536.5
+offset_right = 1920.0
+offset_bottom = 543.5
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("1_6e1d4")
+stretch_mode = 0
 
 [node name="Level3Label" type="Label" parent="HBoxContainer/Level3"]
 layout_mode = 1
@@ -125,7 +140,16 @@ label_settings = SubResource("LabelSettings_4idcl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Level3Button" type="TextureButton" parent="HBoxContainer/Level3"]
+[node name="SpeedrunTimer" parent="HBoxContainer/Level3" instance=ExtResource("4_mybxu")]
+layout_mode = 1
+offset_top = 67.0
+offset_bottom = 69.52
+
+[node name="Level4" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Level4Button" type="TextureButton" parent="HBoxContainer/Level4"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -135,10 +159,25 @@ offset_right = 1920.0
 offset_bottom = 543.5
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("1_6e1d4")
+texture_normal = ExtResource("7_fkvst")
 stretch_mode = 0
 
-[node name="SpeedrunTimer" parent="HBoxContainer/Level3" instance=ExtResource("4_mybxu")]
+[node name="Level4Label" type="Label" parent="HBoxContainer/Level4"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -236.5
+offset_right = 477.0
+offset_bottom = -148.5
+grow_vertical = 2
+text = "The Looooong Way
+"
+label_settings = SubResource("LabelSettings_4idcl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedrunTimer" parent="HBoxContainer/Level4" instance=ExtResource("4_mybxu")]
 layout_mode = 1
 offset_top = 67.0
 offset_bottom = 69.52
