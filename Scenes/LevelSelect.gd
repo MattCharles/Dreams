@@ -8,6 +8,7 @@ var timers: Array[SpeedRunTimer] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var i := 1
 	for entry in container.get_children():
 		for node in entry.get_children():
