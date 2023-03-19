@@ -14,6 +14,9 @@ extends Control
 @onready var options_target = $OptionsTarget
 @onready var quit_target = $QuitTarget
 
+@onready var intro_player = $IntroPlayer
+@onready var looped_player = $LoopedPlayer
+
 var center_of_screen := Vector2(0, 0)
 
 const TITLE_MAX_TRAVEL := Vector2(1000, 1000) # Longest distance title will follow mouse
@@ -36,6 +39,9 @@ func _ready():
 	center_of_screen = rect.size / 2
 	paint_menu()
 	get_tree().create_timer(INTRO_DELAY).timeout.connect(end_intro)
+	intro_player.play()
+	intro_player.finished.connect(looped_player.play)
+	looped_player.finished.connect(looped_player.play)
 	
 func end_intro():
 	intro = false
@@ -48,7 +54,7 @@ func pizza():
 	var pizza_position_tween = get_tree().create_tween()
 	var pizza_alpha_tween = get_tree().create_tween()
 	pizza_position_tween.tween_property(pizza_label, "position",
-			pizza_target.position, 2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+			pizza_target.position, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	pizza_alpha_tween.tween_property(pizza_label, "modulate", Color(1, 1, 1, 1), 1).set_ease(Tween.EASE_IN)
 	
 	pizza_position_tween.tween_callback(dream)
@@ -57,8 +63,8 @@ func dream():
 	var dream_tween = get_tree().create_tween()
 	dream_tween.set_parallel(true)
 	dream_tween.tween_property(dream_label, "position",
-			dream_target.position, 2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .5).set_ease(Tween.EASE_IN)
+			dream_target.position, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .2).set_ease(Tween.EASE_IN)
 
 func start():
 	var start_button_tween = get_tree().create_tween()

@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b30ixqckg1j5c"]
+[gd_scene load_steps=9 format=3 uid="uid://b30ixqckg1j5c"]
 
 [ext_resource type="Script" path="res://Scripts/main-menu.gd" id="1_nvooe"]
 [ext_resource type="FontFile" uid="uid://cwy1n1rvwjg5r" path="res://Fonts/AlienEncounters/SFAlienEncounters.ttf" id="2_pm4sq"]
 [ext_resource type="FontFile" uid="uid://dokcyr4vw5wb6" path="res://Fonts/streamster/Streamster.ttf" id="3_iwtji"]
 [ext_resource type="FontFile" uid="uid://dsx8djwkr6h3g" path="res://Fonts/AlienEncounters/SFAlienEncountersSolid-Ital.ttf" id="4_t56s4"]
+[ext_resource type="AudioStream" uid="uid://pgpvvsbf1gpf" path="res://Sound/Music/Dreamy_Intro.wav" id="5_1s0hb"]
+[ext_resource type="AudioStream" uid="uid://b2ku0pn6ubkyu" path="res://Sound/Music/Dreamy_Loop_part.wav" id="6_22rpp"]
 
 [sub_resource type="Gradient" id="Gradient_8eysy"]
 colors = PackedColorArray(0.941608, 0.772318, 0.179, 1, 0.839401, 0.757699, 0.686455, 1)
@@ -178,6 +180,12 @@ anchor_bottom = 1.0
 offset_top = -60.0
 offset_bottom = -60.0
 grow_vertical = 0
+
+[node name="IntroPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1s0hb")
+
+[node name="LoopedPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_22rpp")
 
 [connection signal="mouse_entered" from="Start" to="." method="_on_start_mouse_entered"]
 [connection signal="mouse_exited" from="Start" to="." method="_on_start_mouse_exited"]
