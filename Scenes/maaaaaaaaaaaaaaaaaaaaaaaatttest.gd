@@ -9,7 +9,7 @@ extends Node3D
 @onready var finish_line := $FinishLine
 
 func _ready():
-	$"/root/GameData".current_level = 3
+	$"/root/GameData".current_level = 4
 	finish_line.finished.connect(go_to_next_scene)
 	get_viewport().set_physics_object_picking(true)
 
@@ -21,4 +21,4 @@ func _process(_delta):
 		pizza.linear_velocity = Vector3.ZERO
 
 func go_to_next_scene():
-	pass
+	get_tree().change_scene_to_file("res://Scenes/LevelSelect.tscn")

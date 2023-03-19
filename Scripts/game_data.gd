@@ -4,6 +4,4 @@ var sound := true
 var steps_sound := false
 var current_level := 0
 
-class Level:
-	var title:String
-	var target_time
+var level_times := [0, 100, 202, 2313, 1231231234]

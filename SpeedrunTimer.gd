@@ -47,6 +47,7 @@ func _process(delta):
 
 func finish_level():
 	stop_timer()
+	$"/root/GameData".level_times[$"/root/GameData".current_level] = minf($"/root/GameData".level_times[$"/root/GameData".current_level], time)
 	emit_signal("finished_level", time)
 
 func stop_timer():

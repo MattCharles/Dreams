@@ -8,13 +8,15 @@ var timers: Array[SpeedRunTimer] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var i := 1
 	for entry in container.get_children():
 		for node in entry.get_children():
 			if node is SpeedRunTimer:
 				timers.push_back(node)
 				node.stop_timer()
-				node.update(2)
+				node.update($"/root/GameData".level_times[i])
 				node.label.text = node.print_formatted_time()
+		i+=1
 
 
 func _on_pizza_level_button_pressed():
