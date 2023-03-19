@@ -2,15 +2,19 @@ extends Control
 
 @export 
 var levels: Array[PackedScene]
+var timers: Array[SpeedRunTimer] = []
+
+@onready var container = $HBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	for entry in container.get_children():
+		for node in entry.get_children():
+			if node is SpeedRunTimer:
+				timers.push_back(node)
+				node.stop_timer()
+				node.update(2)
+				node.label.text = node.print_formatted_time()
 
 
 func _on_pizza_level_button_pressed():

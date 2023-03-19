@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkqe4b8s7l6o0"]
+[gd_scene load_steps=7 format=3 uid="uid://dkqe4b8s7l6o0"]
 
 [ext_resource type="Texture2D" uid="uid://cn1ri3xkce317" path="res://Assets/2d/level_previews/pizza_level.png" id="1_6e1d4"]
 [ext_resource type="Script" path="res://Scenes/LevelSelect.gd" id="1_iv6t7"]
 [ext_resource type="PackedScene" uid="uid://yki14xrx84cy" path="res://Scenes/pizza_level.tscn" id="2_dg18m"]
+[ext_resource type="PackedScene" uid="uid://wadcbm6iue3p" path="res://Scenes/speedrun_timer.tscn" id="4_mybxu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4idcl"]
 font_size = 48
@@ -26,9 +27,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -900.0
-offset_top = 600.0
+offset_top = 361.0
 offset_right = 900.0
-offset_bottom = 1080.0
+offset_bottom = 841.0
 grow_horizontal = 2
 theme_override_constants/separation = 660
 
@@ -63,6 +64,11 @@ label_settings = SubResource("LabelSettings_4idcl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SpeedrunTimer" parent="HBoxContainer/Level1" instance=ExtResource("4_mybxu")]
+layout_mode = 1
+offset_top = 69.0
+offset_bottom = 71.52
+
 [node name="Level2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 
@@ -94,6 +100,13 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("1_6e1d4")
 stretch_mode = 0
 
+[node name="SpeedrunTimer" parent="HBoxContainer/Level2" instance=ExtResource("4_mybxu")]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 72.0
+offset_right = 275.4
+offset_bottom = 74.52
+
 [node name="Level3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 
@@ -124,6 +137,11 @@ grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("1_6e1d4")
 stretch_mode = 0
+
+[node name="SpeedrunTimer" parent="HBoxContainer/Level3" instance=ExtResource("4_mybxu")]
+layout_mode = 1
+offset_top = 67.0
+offset_bottom = 69.52
 
 [node name="MainMenu" type="Button" parent="."]
 layout_mode = 1
