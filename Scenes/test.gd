@@ -12,7 +12,7 @@ func _ready():
 	finish_line.finished.connect(go_to_next_scene)
 	get_viewport().set_physics_object_picking(true)
 
-func _process(_delta):
+func _process(delta):
 	if player.position.y < -30:
 		player.respawn(player_spawn.position)
 	if pizza.position.y < -30:

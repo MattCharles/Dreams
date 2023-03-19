@@ -16,3 +16,7 @@ func _process(_delta):
 		pizza_body.global_position = pizza_spawn.position
 		pizza_body.linear_velocity = Vector3.ZERO
 		pizza_body.angular_velocity = Vector3.ZERO
+
+func go_to_next_scene():
+	get_tree().change_scene_to_file("res://Scenes/maaaaaaaaaaaaaaaaaaaaaaaatttest.tscn")
+	

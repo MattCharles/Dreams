@@ -57,3 +57,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75203, -7.5574)
 
 [node name="PizzaSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86177, 10.6701, -13.5037)
+
+[connection signal="finished" from="FinishLine" to="." method="go_to_next_scene"]
