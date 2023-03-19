@@ -84,5 +84,3 @@ target_position = Vector3(0, 0, -1)
 
 [node name="WalkingFxPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ua4a4")
-
-[connection signal="isSprinting" from="." to="Neck/Camera3D" method="_on_player_is_sprinting"]
