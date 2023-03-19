@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://s5rk7r7kl4jl"]
+
+[ext_resource type="Script" path="res://Scenes/IntroLevel.gd" id="1_klvda"]
+[ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="2_6pa2j"]
+[ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="3_nqrvw"]
+[ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="4_1trtt"]
+[ext_resource type="PackedScene" uid="uid://bsmww825t258y" path="res://Scenes/HUD.tscn" id="5_suiro"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7rkdn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fdi5v"]
+sky_material = SubResource("ProceduralSkyMaterial_7rkdn")
+
+[sub_resource type="Environment" id="Environment_rrpnd"]
+background_mode = 2
+sky = SubResource("Sky_fdi5v")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vkfeq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o74l8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_34iys"]
+lightmap_size_hint = Vector2i(14, 21)
+material = SubResource("StandardMaterial3D_o74l8")
+size = Vector3(10, 10, 10)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_klvda")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rrpnd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="box" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.18249, -5.03551, 9.64117)
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="box"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+shape = SubResource("BoxShape3D_vkfeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="box"]
+mesh = SubResource("BoxMesh_34iys")
+skeleton = NodePath("../..")
+
+[node name="Player" parent="." instance=ExtResource("2_6pa2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14442, 0, 13.0873)
+
+[node name="PizzaSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.60134, 1.8541, 1.12018)
+top_level = true
+
+[node name="SpinningPizza" parent="." instance=ExtResource("3_nqrvw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.44256, 0, 11.7143)
+
+[node name="FinishLine" parent="." instance=ExtResource("4_1trtt")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.80139, 2.40726, 6.21195)
+
+[node name="HUD" parent="." instance=ExtResource("5_suiro")]
+visible = true
+
+[node name="PlayerSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12073, 0.655181, 13.5395)

@@ -94,7 +94,7 @@ func quit():
 	quit_button_tween.tween_property(quit_button, "modulate", Color(1, 1, 1, 1), 1).set_ease(Tween.EASE_IN)
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file("res://Scenes/matttest.tscn")
+	get_tree().change_scene_to_file("res://Scenes/intro.tscn")
 
 func _on_options_pressed():
 	get_tree().change_scene_to_file("res://Scenes/options.tscn")

@@ -1,7 +1,7 @@
 extends Button
 
-var on := "SOUND: ON"
-var off := "SOUND: OF"
+var on := "MUSIC: ON"
+var off := "MUSIC: OF"
 
 func _on_pressed():
 	if $"/root/GameData".sound:

@@ -9,7 +9,7 @@ extends Node3D
 func _ready():
 	get_viewport().set_physics_object_picking(true)
 
-func _process(delta):
+func _process(_delta):
 	if player.position.y < -20:
 		player.respawn(player_spawn.position)
 	if pizza_body.position.y < -20:

@@ -133,7 +133,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14442, 0, 13.0873)
 
 [node name="PizzaSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19893, 1.8541, -0.0998753)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63172, 1.8541, -0.0998753)
 
 [node name="SpinningPizza" parent="." instance=ExtResource("4_kcjbq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39247, 0, -0.653124)
@@ -142,6 +142,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.39247, 0, -0.653124)
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.08098, 2.40726, -44.3743)
 
 [node name="HUD" parent="." instance=ExtResource("7_i87bt")]
+visible = true
 
 [node name="PlayerSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12073, 0.655181, 13.5395)

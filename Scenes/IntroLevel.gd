@@ -20,5 +20,5 @@ func _process(_delta):
 		pizza.linear_velocity = Vector3.ZERO
 
 func go_to_next_scene():
-	get_tree().change_scene_to_file("res://Scenes/pizza_level.tscn")
+	get_tree().change_scene_to_file("res://Scenes/matttest.tscn")
 	

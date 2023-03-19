@@ -171,7 +171,6 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, STOP_SPEED * delta)
 	if grapple_chain_fully_extended:
 		var point_to_hook = global_position.direction_to(grapple_line.end)
-		var original_magnitude = velocity.length()
 		var new_rotation_axis = velocity.normalized().cross(point_to_hook)
 		new_rotation_axis = new_rotation_axis.normalized()
 		if not new_rotation_axis.is_normalized():
@@ -197,7 +196,7 @@ func _physics_process(delta: float) -> void:
 		original_hook_distance = grapple_line.get_distance()
 		
 	
-	if($"/root/GameData".sound):
+	if($"/root/GameData".steps_sound):
 		if(velocity.y == 0 and (velocity.x != 0 or velocity.z != 0)):
 			if (not $WalkingFxPlayer.playing):
 				var walkingFxLength = $WalkingFxPlayer.stream.get_length()
@@ -206,12 +205,9 @@ func _physics_process(delta: float) -> void:
 				
 				if (not $WalkingFxPlayer.has_stream_playback()):
 					$WalkingFxPlayer.play()
-						
-				print(lastWalkingSfxPosition)
 				$WalkingFxPlayer.stream_paused = false
 		else:
 			lastWalkingSfxPosition = $WalkingFxPlayer.get_playback_position()
-			print("stopping playingback at " + str(lastWalkingSfxPosition))
 			$WalkingFxPlayer.stream_paused = true
 		
 		

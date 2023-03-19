@@ -32,7 +32,7 @@ script = ExtResource("1_375or")
 transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, 0, 0, -15.5803)
 
 [node name="Player" parent="." instance=ExtResource("2_g5ycb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.831638, 15.7897, -25.9131)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.831638, 0.829118, -7.66724)
 
 [node name="FinishLine" parent="." instance=ExtResource("3_5ol8n")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.87975, 12.6598, -25.4817)
@@ -47,7 +47,6 @@ light_energy = 11.884
 light_indirect_energy = 1.623
 
 [node name="SpeedrunTimer" parent="." instance=ExtResource("5_r7140")]
-visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_g88mi")

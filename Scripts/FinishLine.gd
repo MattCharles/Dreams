@@ -9,11 +9,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_area_3d_body_entered(body):
-	print("logging collision with " + str(body))
 	if body is Pizza:
-		print(" Pizza O_O ")
 		emit_signal("finished")
