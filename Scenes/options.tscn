@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2a250dc1gt37"]
+
+[ext_resource type="FontFile" uid="uid://cwy1n1rvwjg5r" path="res://Fonts/AlienEncounters/SFAlienEncounters.ttf" id="1_jpmcc"]
+[ext_resource type="Script" path="res://Scenes/SoundButton.gd" id="2_gh1xo"]
+[ext_resource type="Script" path="res://Scenes/BackToMenu.gd" id="3_7dhm8"]
+
+[node name="options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.729412, 0.0313726, 1)
+
+[node name="BGColor2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = 26.0
+offset_right = -38.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.913725, 0.913725, 0, 1)
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.709
+offset_left = 36.0
+offset_top = 29.0
+offset_right = -37.0
+offset_bottom = 0.279968
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SoundButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.490196, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.960784, 0.32549, 0, 1)
+theme_override_fonts/font = ExtResource("1_jpmcc")
+theme_override_font_sizes/font_size = 128
+toggle_mode = true
+text = "Sound: ON"
+flat = true
+script = ExtResource("2_gh1xo")
+
+[node name="MenuButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.231
+anchor_top = 0.862
+anchor_right = 0.77
+anchor_bottom = 0.963
+offset_left = -0.52002
+offset_top = 0.039978
+offset_right = 0.599976
+offset_bottom = -0.0400391
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.960784, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.490196, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.960784, 0.32549, 0, 1)
+theme_override_fonts/font = ExtResource("1_jpmcc")
+theme_override_font_sizes/font_size = 128
+text = "BACK TO MENU"
+flat = true
+script = ExtResource("3_7dhm8")
+
+[connection signal="pressed" from="ButtonContainer/SoundButton" to="ButtonContainer/SoundButton" method="_on_pressed"]
+[connection signal="pressed" from="MenuButton" to="MenuButton" method="_on_pressed"]

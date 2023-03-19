@@ -62,7 +62,6 @@ var lockedCam = false
 var groundedMovementThisFrame = false
 @export
 var lastWalkingSfxPosition = 0;
-var noise:= false
 var num_jumps := 1
 const COYOTE_LIMIT := .5
 var airtime := 0.0
@@ -198,7 +197,7 @@ func _physics_process(delta: float) -> void:
 		original_hook_distance = grapple_line.get_distance()
 		
 	
-	if(noise):
+	if($"/root/GameData".sound):
 		if(velocity.y == 0 and (velocity.x != 0 or velocity.z != 0)):
 			if (not $WalkingFxPlayer.playing):
 				var walkingFxLength = $WalkingFxPlayer.stream.get_length()

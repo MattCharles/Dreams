@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://blpr8kc3qthqn"]
+[gd_scene load_steps=12 format=3 uid="uid://blpr8kc3qthqn"]
 
 [ext_resource type="Script" path="res://Scenes/test.gd" id="1_kxx5o"]
 [ext_resource type="PackedScene" uid="uid://chkkys4p7l1vq" path="res://Scenes/Player.tscn" id="3_ll6y3"]
 [ext_resource type="PackedScene" uid="uid://kvdu4itnqh2e" path="res://Assets/pizza/spinningpizza.tscn" id="4_kcjbq"]
-[ext_resource type="PackedScene" uid="uid://dfnoahrrt2swg" path="res://Scenes/wiggle_box.tscn" id="6_20pyq"]
 [ext_resource type="PackedScene" uid="uid://d4ama7j4hhi68" path="res://Scenes/finish_line.tscn" id="6_mxuol"]
 [ext_resource type="PackedScene" uid="uid://bsmww825t258y" path="res://Scenes/HUD.tscn" id="7_i87bt"]
 
@@ -146,6 +145,3 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1.08098, 2.40726, -44.3743)
 
 [node name="PlayerSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12073, 0.655181, 13.5395)
-
-[node name="wiggle_box" parent="." instance=ExtResource("6_20pyq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8504, 0, 0)

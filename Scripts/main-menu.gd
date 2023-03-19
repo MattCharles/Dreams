@@ -39,9 +39,10 @@ func _ready():
 	center_of_screen = rect.size / 2
 	paint_menu()
 	get_tree().create_timer(INTRO_DELAY).timeout.connect(end_intro)
-	intro_player.play()
-	intro_player.finished.connect(looped_player.play)
-	looped_player.finished.connect(looped_player.play)
+	if $"/root/GameData".sound:
+		intro_player.play()
+		intro_player.finished.connect(looped_player.play)
+		looped_player.finished.connect(looped_player.play)
 	
 func end_intro():
 	intro = false
@@ -96,8 +97,7 @@ func _on_start_pressed():
 	get_tree().change_scene_to_file("res://Scenes/matttest.tscn")
 
 func _on_options_pressed():
-	print("Ain't no options mang")
-	
+	get_tree().change_scene_to_file("res://Scenes/options.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -107,37 +107,27 @@ func _on_start_mouse_entered():
 	position_tween.tween_property(start_button, "position",
 			start_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 
-
 func _on_options_mouse_entered():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(options_button, "position",
 			options_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	
-
 
 func _on_quit_mouse_entered():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position + HOVER_OFFSET_VECTOR, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	
-
 
 func _on_start_mouse_exited():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(start_button, "position",
 			start_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	
-
 
 func _on_options_mouse_exited():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(options_button, "position",
 			options_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	
-
 
 func _on_quit_mouse_exited():
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(quit_button, "position",
 			quit_target.position, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
-	
