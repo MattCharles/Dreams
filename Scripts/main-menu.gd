@@ -69,7 +69,7 @@ func dream():
 			dream_target.position, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 	dream_tween.tween_property(dream_label, "modulate", Color(1, 1, 1, 1), .2).set_ease(Tween.EASE_IN)
 
-func start():
+func tween_dream():
 	var select_button_tween = get_tree().create_tween()
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(select_button, "position",
@@ -78,7 +78,7 @@ func start():
 	
 	select_button_tween.tween_callback(tween_dream)
 
-func tween_dream():
+func start():
 	var start_button_tween = get_tree().create_tween()
 	var position_tween = get_tree().create_tween()
 	position_tween.tween_property(start_button, "position",
